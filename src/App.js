@@ -1,26 +1,50 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import SignIn from "./components/SignIn";
+import LogIn from "./components/LogIn";
+import { history } from "./_helpers/history";
+import { authenticationService } from "./_services/authentication_service";
+// import { PrivateRoute } from '@/_components/PrivateRoute';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function Index() {
+  return <h2>Index</h2>;
 }
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentUser: null
+    };
+  }
+
+  componentDidMount() {
+    authenticationService.currentUser.subscribe(x =>
+      this.setState({ currentUser: x })
+    );
+  }
+
+  logout() {
+    authenticationService.logout();
+    history.push("/login");
+  }
+
+  render() {
+    const { alert } = this.props;
+    console.log(alert);
+
+    return (
+      <Router>
+        <Link to="/">Home</Link>
+        <Link to="/signin">Sign in</Link>
+        <Link to="/login">Log in</Link>
+        
+        <Route path="/" exact component={Index} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/login" component={LogIn} />
+      </Router>
+    );
+  }
+}
 export default App;
