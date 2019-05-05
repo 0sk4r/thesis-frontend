@@ -1,6 +1,11 @@
 import React from "react";
 import { authenticationService } from "../_services/authentication_service";
 
+import {
+  Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
+} from 'antd';
+import { from } from "rxjs";
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -54,10 +59,10 @@ class SignIn extends React.Component {
     } = this.state;
 
     return (
-      <div>
+      <React.Fragment>
         <h2>Sign in</h2>
         {errors && <div>{errors}</div>}
-        <form name="form" onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <div>
             <label htmlFor="email">Email</label>
             <input
@@ -103,11 +108,12 @@ class SignIn extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div>
-            <button>Sign in</button>
-          </div>
-        </form>
-      </div>
+          <Form.Item>
+            {/* <button>Sign in</button> */}
+            <Button type="primary" htmlType="submit">Register</Button>
+          </Form.Item>
+        </Form>
+        </React.Fragment>
     );
   }
 }

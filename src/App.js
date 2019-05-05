@@ -6,6 +6,8 @@ import { history } from "./_helpers/history";
 import { authenticationService } from "./_services/authentication_service";
 // import { PrivateRoute } from '@/_components/PrivateRoute';
 
+import './App.css';
+
 function Index() {
   return <h2>Index</h2>;
 }
