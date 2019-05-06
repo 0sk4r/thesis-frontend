@@ -1,10 +1,7 @@
 import React from "react";
 import { authenticationService } from "../_services/authentication_service";
 
-import {
-  Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete,
-} from 'antd';
-import { from } from "rxjs";
+import { Form, Input, Button, Alert } from "antd";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -49,72 +46,132 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const {
-      email,
-      password,
-      password_confirmation,
-      nick,
-      name,
-      errors
-    } = this.state;
+    const { errors } = this.state;
+
+    const { getFieldDecorator } = this.props.form;
+
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 8 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 8 }
+      }
+    };
+
+    const tailFormItemLayout = {
+      wrapperCol: {
+        xs: {
+          span: 24,
+          offset: 0
+        },
+        sm: {
+          span: 16,
+          offset: 8
+        }
+      }
+    };
 
     return (
       <React.Fragment>
-        <h2>Sign in</h2>
-        {errors && <div>{errors}</div>}
-        <Form onSubmit={this.handleSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="nick">Nick</label>
-            <input
-              type="text"
-              name="nick"
-              value={nick}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="password_confirmation">Password confirmation</label>
-            <input
-              type="password"
-              name="password_confirmation"
-              value={password_confirmation}
-              onChange={this.handleChange}
-            />
-          </div>
-          <Form.Item>
-            {/* <button>Sign in</button> */}
-            <Button type="primary" htmlType="submit">Register</Button>
+        <div style={{ textAlign: "center" }}>
+          <h1>Sign in</h1>
+          {errors && (
+            <div>
+              <Alert
+                message="Error"
+                description={errors}
+                type="error"
+                showIcon
+              />
+            </div>
+          )}
+        </div>
+        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+          <Form.Item label="E-mail:">
+            {getFieldDecorator("email", {
+              rules: [
+                {
+                  type: "email",
+                  message: "The input is not valid E-mail!"
+                },
+                {
+                  required: true,
+                  message: "Please input your E-mail!"
+                }
+              ]
+            })(<Input name="email" onChange={this.handleChange} />)}
+          </Form.Item>
+
+          <Form.Item label="Name:">
+            {getFieldDecorator("name", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please input your name!",
+                  whitespace: true
+                }
+              ]
+            })(<Input name="name" onChange={this.handleChange} />)}
+          </Form.Item>
+
+          <Form.Item label="Nick:">
+            {getFieldDecorator("nick", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please input your nickname!",
+                  whitespace: true
+                }
+              ]
+            })(<Input name="nick" onChange={this.handleChange} />)}
+          </Form.Item>
+
+          <Form.Item label="Password:">
+            {getFieldDecorator("password", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please input your password!"
+                }
+              ]
+            })(
+              <Input
+                name="password"
+                type="password"
+                onChange={this.handleChange}
+              />
+            )}
+          </Form.Item>
+
+          <Form.Item label="Confirm Password:">
+            {getFieldDecorator("confirm", {
+              rules: [
+                {
+                  required: true,
+                  message: "Please confirm your password!"
+                }
+              ]
+            })(
+              <Input
+                name="password_confirmation"
+                type="password"
+                onChange={this.handleChange}
+              />
+            )}
+          </Form.Item>
+
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
           </Form.Item>
         </Form>
-        </React.Fragment>
+      </React.Fragment>
     );
   }
 }
-export default SignIn;
+const WrappedSignIn = Form.create({ name: "register" })(SignIn);
+export default WrappedSignIn;
