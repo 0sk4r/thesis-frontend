@@ -1,19 +1,17 @@
 import React from "react";
 import { authenticationService } from "../_services/authentication_service";
 import { Form, Input, Button, Alert } from "antd";
+import { AuthContext } from "../_helpers/auth_context";
 
 class LogIn extends React.Component {
   constructor(props) {
     super(props);
 
-    if (authenticationService.currentUserValue) {
-      this.props.history.push("/");
-    }
-
     this.state = {
       email: "",
       password: "",
-      errors: ""
+      errors: "",
+      isLoading: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,17 +23,25 @@ class LogIn extends React.Component {
     this.setState({ [name]: value });
   }
 
+  componentDidMount() {
+    if (this.context.isAuth) {
+      this.props.history.push("/");
+    }
+  }
   handleSubmit(e) {
     e.preventDefault();
-
+    this.setState({ isLoading: true });
     const { email, password } = this.state;
 
     authenticationService
       .login(email, password)
-      .then(response => {
+      .then(user => {
+        this.setState({ isLoading: false });
+        this.context.loginContext(user);
         this.props.history.push("/");
       })
       .catch(error => {
+        this.setState({ isLoading: false });
         const errors_messages = error.response.data.errors;
         this.setState({ errors: errors_messages });
       });
@@ -73,7 +79,7 @@ class LogIn extends React.Component {
     return (
       <React.Fragment>
         <div style={{ textAlign: "center" }}>
-          <h1>Sign in</h1>
+          <h1>Log in</h1>
           {errors && (
             <div>
               <Alert
@@ -117,7 +123,11 @@ class LogIn extends React.Component {
             )}
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={this.state.isLoading}
+            >
               Login
             </Button>
           </Form.Item>
@@ -126,5 +136,8 @@ class LogIn extends React.Component {
     );
   }
 }
+
+LogIn.contextType = AuthContext;
+
 const WrappedLogIn = Form.create({ name: "login" })(LogIn);
 export default WrappedLogIn;

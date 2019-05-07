@@ -1,5 +1,6 @@
 import React from "react";
 import { authenticationService } from "../_services/authentication_service";
+import { AuthContext } from "../_helpers/auth_context";
 
 import { Form, Input, Button, Alert } from "antd";
 
@@ -43,6 +44,12 @@ class SignIn extends React.Component {
         const errors_messages = error.response.data.errors.full_messages;
         this.setState({ errors: errors_messages });
       });
+  }
+
+  componentDidMount() {
+    if (this.context.isAuth) {
+      this.props.history.push("/");
+    }
   }
 
   render() {
@@ -173,5 +180,8 @@ class SignIn extends React.Component {
     );
   }
 }
+
+SignIn.contextType = AuthContext;
+
 const WrappedSignIn = Form.create({ name: "register" })(SignIn);
 export default WrappedSignIn;
