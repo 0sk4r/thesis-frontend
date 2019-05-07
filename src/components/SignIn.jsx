@@ -109,7 +109,13 @@ class SignIn extends React.Component {
                   message: "Please input your E-mail!"
                 }
               ]
-            })(<Input name="email" onChange={this.handleChange} />)}
+            })(
+              <Input
+                name="email"
+                onChange={this.handleChange}
+                autoComplete="email"
+              />
+            )}
           </Form.Item>
 
           <Form.Item label="Name:">
@@ -133,7 +139,13 @@ class SignIn extends React.Component {
                   whitespace: true
                 }
               ]
-            })(<Input name="nick" onChange={this.handleChange} />)}
+            })(
+              <Input
+                name="nick"
+                onChange={this.handleChange}
+                autoComplete="username"
+              />
+            )}
           </Form.Item>
 
           <Form.Item label="Password:">
@@ -149,6 +161,7 @@ class SignIn extends React.Component {
                 name="password"
                 type="password"
                 onChange={this.handleChange}
+                autoComplete="new-password"
               />
             )}
           </Form.Item>
@@ -166,6 +179,7 @@ class SignIn extends React.Component {
                 name="password_confirmation"
                 type="password"
                 onChange={this.handleChange}
+                autoComplete="new-password"
               />
             )}
           </Form.Item>

@@ -1,7 +1,6 @@
 import React from "react";
-import { authenticationService } from "../_services/authentication_service";
 import { AuthContext } from "../_helpers/auth_context";
-
+import { authenticationService } from "../_services/authentication_service";
 import { Spin, Alert } from "antd";
 
 class LogOut extends React.Component {
@@ -18,10 +17,18 @@ class LogOut extends React.Component {
 
   logout() {
     this.setState({ isLoading: true });
-    this.setState({ isLoading: false });
-    this.context.logoutContext();
-    this.props.history.push("/");
-    localStorage.removeItem("user");
+
+    authenticationService
+      .logout()
+      .then(response => {
+        this.setState({ isLoading: false });
+        this.context.logoutContext();
+        this.props.history.push("/");
+        localStorage.removeItem("user");
+      })
+      .catch(error => {
+        this.setState({ isLoading: false, error: error.response.data.errors });
+      });
   }
 
   componentDidMount() {

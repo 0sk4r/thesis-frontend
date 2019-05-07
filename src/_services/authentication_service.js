@@ -1,8 +1,5 @@
 const axios = require("axios");
 
-// import config from 'config';
-// import { handleResponse } from '../_helpers/handle_response';
-
 export const authenticationService = {
   login,
   logout,
@@ -17,7 +14,6 @@ function login(email, password) {
       password: password
     })
     .then(function(response) {
-      console.log(response);
       const headers = response.headers;
 
       const access_token = headers["access-token"];
@@ -68,14 +64,26 @@ function validate() {
   if (localStorage.getItem("user")) {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    return axios.delete("http://localhost:3000/auth/sign_out", {
-      headers: {
-        uid: user.uid,
-        client: user.client,
-        "access-token": user.access_token,
-        expiry: user.expiry,
-        "token-type": "Bearer"
-      }
-    });
+    return axios
+      .get("http://localhost:3000/auth/validate_token", {
+        headers: {
+          uid: user.uid,
+          client: user.client,
+          "access-token": user.access_token,
+          expiry: user.expiry,
+          "token-type": "Bearer"
+        }
+      })
+      .then(response => handleTokenChange(response));
+  }
+
+  function handleTokenChange(response) {
+    const access_token = response.headers["access-token"];
+    if (access_token) {
+      let user = JSON.parse(localStorage.getItem("user"));
+      user.access_token = access_token;
+
+      localStorage.setItem("user", JSON.stringify(user));
+    }
   }
 }

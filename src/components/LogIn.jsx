@@ -104,7 +104,13 @@ class LogIn extends React.Component {
                   message: "Please input your E-mail!"
                 }
               ]
-            })(<Input name="email" onChange={this.handleChange} />)}
+            })(
+              <Input
+                name="email"
+                onChange={this.handleChange}
+                autoComplete="email"
+              />
+            )}
           </Form.Item>
           <Form.Item label="Password:">
             {getFieldDecorator("password", {
@@ -119,6 +125,7 @@ class LogIn extends React.Component {
                 name="password"
                 type="password"
                 onChange={this.handleChange}
+                autoComplete="current-password"
               />
             )}
           </Form.Item>
