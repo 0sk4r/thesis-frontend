@@ -4,6 +4,7 @@ import SignIn from "./components/SignIn";
 import LogIn from "./components/LogIn";
 import LogOut from "./components/LogOut";
 import Header from "./components/Header";
+import PostForm from "./components/Post/PostForm"
 import "./App.css";
 import { Layout } from "antd";
 import { AuthProvider } from "./_helpers/auth_context";
@@ -27,6 +28,7 @@ class App extends React.Component {
                 <Route path="/signin" component={SignIn} />
                 <Route path="/login" component={LogIn} />
                 <Route path="/logout" component={LogOut} />
+                <Route path="/post/new" component={PostForm} />
               </div>
             </Content>
 

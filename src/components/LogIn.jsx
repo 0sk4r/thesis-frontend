@@ -28,6 +28,7 @@ class LogIn extends React.Component {
       this.props.history.push("/");
     }
   }
+  
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ isLoading: true });

@@ -23,9 +23,12 @@ function CustomHeader(props) {
         </Menu.Item>
 
         {context.isAuth ? (
+          [<Menu.Item key="/post/new">
+            <Link to="/post/new">Create new post</Link>
+          </Menu.Item>,
           <Menu.Item key="/logout" style={style}>
             <Link to="/logout">Log out</Link>
-          </Menu.Item>
+          </Menu.Item>]
         ) : (
           [
             <Menu.Item key="/signin" style={style}>

@@ -79,10 +79,11 @@ function validate() {
 
   function handleTokenChange(response) {
     const access_token = response.headers["access-token"];
+    const expiry = response.headers["expiry"];
     if (access_token) {
       let user = JSON.parse(localStorage.getItem("user"));
       user.access_token = access_token;
-
+      user.expiry = expiry;
       localStorage.setItem("user", JSON.stringify(user));
     }
   }
