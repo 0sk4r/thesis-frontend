@@ -34,7 +34,7 @@ function login(email, password) {
 }
 
 function signin(email, nick, name, password, password_confirmation) {
-  return axios.post("http://localhost:3000/auth/", {
+  return axios.post("/auth/", {
     email: email,
     nickname: nick,
     name: name,
@@ -48,7 +48,7 @@ function logout() {
   if (localStorage.getItem("user")) {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    return axios.delete("http://localhost:3000/auth/sign_out", {
+    return axios.delete("/auth/sign_out", {
       headers: {
         uid: user.uid,
         client: user.client,
@@ -65,7 +65,7 @@ function validate() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     return axios
-      .get("http://localhost:3000/auth/validate_token", {
+      .get("/auth/validate_token", {
         headers: {
           uid: user.uid,
           client: user.client,

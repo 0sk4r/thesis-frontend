@@ -9,7 +9,7 @@ export const postService = {
 function create(title, content) {
   return axios
     .post(
-      "http://localhost:3000/api/posts/",
+      "/api/posts/",
       { title: title, content: content },
       {
         headers: authenticationHelper.getHeaders()
