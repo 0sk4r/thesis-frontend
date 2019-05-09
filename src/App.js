@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute"
 import SignIn from "./components/SignIn";
 import LogIn from "./components/LogIn";
 import LogOut from "./components/LogOut";
@@ -28,7 +29,7 @@ class App extends React.Component {
                 <Route path="/signin" component={SignIn} />
                 <Route path="/login" component={LogIn} />
                 <Route path="/logout" component={LogOut} />
-                <Route path="/post/new" component={PostForm} />
+                <PrivateRoute path="/post/new" component={PostForm} />
               </div>
             </Content>
 
