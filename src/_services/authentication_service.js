@@ -33,15 +33,17 @@ function login(email, password) {
     });
 }
 
-function signin(email, nick, name, password, password_confirmation) {
-  return axios.post("/auth/", {
-    email: email,
-    nickname: nick,
-    name: name,
-    password: password,
-    password_confirmation: password_confirmation,
-    confirm_success_url: "http://localhost:3000/"
-  });
+function signin(email, nick, name, password, password_confirmation, image) {
+  let data = new FormData();
+  data.append('email', email);
+  data.append('nickname', nick);
+  data.append('name', name);
+  data.append('password', password);
+  data.append('password_confirmation', password_confirmation);
+  data.append('confirm_success_url', "http://localhost:3000/");
+  data.append('image', image);
+
+  return axios.post("/auth/", data);
 }
 
 function logout() {

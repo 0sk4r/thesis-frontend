@@ -1,8 +1,9 @@
 import React from "react";
+
 import { authenticationService } from "../_services/authentication_service";
 import { AuthContext } from "../_helpers/auth_context";
 
-import { Form, Input, Button, Alert } from "antd";
+import { Form, Input, Button, Alert} from "antd";
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -18,11 +19,14 @@ class SignIn extends React.Component {
       password_confirmation: "",
       nick: "",
       name: "",
-      errors: ""
+      errors: "",
+      isLoading: false,
+      file: null
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFileChange = this.handleFileChange.bind(this);
   }
 
   handleChange(e) {
@@ -30,17 +34,33 @@ class SignIn extends React.Component {
     this.setState({ [name]: value });
   }
 
+  handleFileChange(e) {
+    this.setState({ file: e.target.files[0] });
+    return false;
+  }
+
   handleSubmit(e) {
     e.preventDefault();
 
-    const { email, nick, name, password, password_confirmation } = this.state;
+    this.setState({ isLoading: true });
+
+    const {
+      email,
+      nick,
+      name,
+      password,
+      password_confirmation,
+      file
+    } = this.state;
 
     authenticationService
-      .signin(email, nick, name, password, password_confirmation)
+      .signin(email, nick, name, password, password_confirmation, file)
       .then(response => {
+        this.setState({ isLoading: false });
         this.props.history.push("/");
       })
       .catch(error => {
+        this.setState({ isLoading: false });
         const errors_messages = error.response.data.errors.full_messages;
         this.setState({ errors: errors_messages });
       });
@@ -184,8 +204,16 @@ class SignIn extends React.Component {
             )}
           </Form.Item>
 
+          <Form.Item label="Avatar:">
+            <Input type="file" onChange={this.handleFileChange} />
+          </Form.Item>
+
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={this.state.isLoading}
+            >
               Register
             </Button>
           </Form.Item>
