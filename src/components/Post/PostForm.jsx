@@ -8,8 +8,9 @@ const { TextArea } = Input;
 function PostForm(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [isLoading, setIsLoadin] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [file, setFile] = useState(null);
 
   const formItemLayout = {
     labelCol: {
@@ -35,22 +36,27 @@ function PostForm(props) {
     }
   };
 
+  function handleFileChange(e) {
+    console.log(e.target.files);
+    setFile(e.target.files[0]);
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
-    setIsLoadin(true);
+    setIsLoading(true);
 
     postService
-      .create(title, content)
+      .create(title, content, file)
       .then(response => {
         console.log(response);
-        authenticationHelper.handleTokenChange(response)
-        setIsLoadin(false);
+        authenticationHelper.handleTokenChange(response);
+        setIsLoading(false);
         props.history.push("/");
       })
       .catch(error => {
-        console.log(error.response)
+        console.log(error.response);
         authenticationHelper.handleTokenChange(error.response);
-        setIsLoadin(false)
+        setIsLoading(false);
         const errors_messages = error.response.data.errors;
         setError(errors_messages);
       });
@@ -90,7 +96,17 @@ function PostForm(props) {
                 whitespace: true
               }
             ]
-          })(<TextArea rows={10} name="content" onChange={e => setContent(e.target.value)} />)}
+          })(
+            <TextArea
+              rows={10}
+              name="content"
+              onChange={e => setContent(e.target.value)}
+            />
+          )}
+        </Form.Item>
+
+        <Form.Item label="Image:">
+          <Input type="file" onChange={handleFileChange} />
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>

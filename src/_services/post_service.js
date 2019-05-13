@@ -3,29 +3,30 @@ const axios = require("axios");
 
 export const postService = {
   create,
+  getAll,
   get
 };
 
-function create(title, content) {
+function create(title, content,file) {
+  let data = new FormData();
+  data.append("title", title);
+  data.append("content", content);
+  data.append("image", file);
+  
   return axios
     .post(
       "/api/posts/",
-      { title: title, content: content },
+      data,
       {
         headers: authenticationHelper.getHeaders()
       }
     )
-  // return axios({
-  //   method: "post",
-  //   url: "http://localhost:3000/api/posts/",
-  //   headers: authenticationHelper.getHeaders(),
-  //   data: {
-  //       title: title,
-  //       content: content
-  //   }
-  // }).then(response => authenticationHelper.handleTokenChange(response));
-
-  //return Api2.post('/posts/', {title: title, content:content}).then(response => authenticationHelper.handleTokenChange(response));
 }
 
-function get() {}
+function getAll() {
+  return axios.get("/api/posts/")
+}
+
+function get(id){
+  return axios.get(`/api/posts/${id}`)
+}
