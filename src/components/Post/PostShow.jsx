@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { postService } from "../../_services/post_service";
 import { Alert } from "antd";
+import CommentComponent from "../Comment/CommentComponent";
 
 function PostShow(props) {
   const { match } = props;
   const [post, setPost] = useState({});
   const [user, setUser] = useState({});
+  const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState("");
 
@@ -17,6 +19,9 @@ function PostShow(props) {
         setIsLoading(false);
         setPost(response.data);
         setUser(response.data.user);
+        setComments(response.data.comment)
+        console.log(response.data.comment)
+        console.log(comments)
       })
       .catch(error => {
         setIsLoading(false);
@@ -46,6 +51,7 @@ function PostShow(props) {
       <h1>{post.title}</h1>
       <p>by {user.name}</p>
       <p> {post.content} </p>
+      <CommentComponent post_id={post.id} comments={comments}/>
     </React.Fragment>
   );
 }
