@@ -17,7 +17,7 @@ function PostContainer(props) {
       actions={[
         <IconText type="star-o" text="156" />,
         <IconText type="like-o" text="156" />,
-        <IconText type="message" text="2" />
+        <IconText type="message" text={post.comment.length} />
       ]}
       extra={<img width={272} alt="logo" src={post.image.url} />}
     >

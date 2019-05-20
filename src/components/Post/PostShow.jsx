@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { postService } from "../../_services/post_service";
-import { Alert } from "antd";
+import { List, Alert, Avatar, Icon } from "antd";
 import CommentComponent from "../Comment/CommentComponent";
+
+const IconText = ({ type, text }) => (
+  <span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+    {text}
+  </span>
+);
 
 function PostShow(props) {
   const { match } = props;
@@ -48,9 +55,28 @@ function PostShow(props) {
     </div>
   ) : (
     <React.Fragment>
-      <h1>{post.title}</h1>
+      <List itemLayout="vertical" size="large" loading={isLoading}>
+      <List.Item
+      key={post.id}
+      actions={[
+        <IconText type="star-o" text="156" />,
+        <IconText type="like-o" text="156" />,
+        <IconText type="message" text={comments.length} />
+      ]}
+    >
+      <List.Item.Meta
+        avatar={<Avatar src={user.image.url} />}
+        title={
+            <p>{post.title}</p>
+        }
+        description={<p>by {user.name}</p>}
+      />
+      {post.content}
+    </List.Item>
+      </List>
+      {/* <h1>{post.title}</h1>
       <p>by {user.name}</p>
-      <p> {post.content} </p>
+      <p> {post.content} </p> */}
       <CommentComponent post_id={post.id} comments={comments}/>
     </React.Fragment>
   );
