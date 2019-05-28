@@ -15,9 +15,9 @@ function PostContainer(props) {
     <List.Item
       key={post.id}
       actions={[
-        <IconText type="star-o" text="156" />,
-        <IconText type="like-o" text="156" />,
-        <IconText type="message" text={post.comment.length} />
+        <IconText type="like" text={post.likes} />,
+        <IconText type="dislike" text={post.dislikes} />,
+        <IconText type="message" text={post.comment_count} />
       ]}
       extra={<img width={272} alt="logo" src={post.image.url} />}
     >
