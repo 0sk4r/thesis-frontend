@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
 
-import { Form, Input, Button, Alert } from "antd";
+import { Form, Button, Alert } from "antd";
+import MentionComponent from "../shared/MentionComponent";
+
 import { authenticationHelper } from "../../_helpers/auth_helpers";
 
 import { commentService } from "../../_services/comment_service";
-
-const { TextArea } = Input;
 
 function CommentForm(props) {
   const { post_id } = props;
@@ -39,6 +39,7 @@ function CommentForm(props) {
         setError(errors_messages);
       });
   }
+
   return (
     <React.Fragment>
       <div style={{ textAlign: "center" }}>
@@ -49,7 +50,7 @@ function CommentForm(props) {
         )}
       </div>
       <Form onSubmit={handleSubmit}>
-        <Form.Item label="Comment:">
+        <Form.Item label="Comment:" name="content">
           {getFieldDecorator("content", {
             rules: [
               {
@@ -58,13 +59,7 @@ function CommentForm(props) {
                 whitespace: true
               }
             ]
-          })(
-            <TextArea
-              rows={10}
-              name="content"
-              onChange={e => setContent(e.target.value)}
-            />
-          )}
+          })(<MentionComponent onChange={content => setContent(content)} />)}
         </Form.Item>
 
         <Form.Item>
@@ -80,4 +75,3 @@ function CommentForm(props) {
 const WrappedCommentForm = Form.create({ name: "new" })(CommentForm);
 const WrappedComentFormWithRouter = withRouter(WrappedCommentForm);
 export default WrappedComentFormWithRouter;
-
