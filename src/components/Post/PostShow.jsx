@@ -36,7 +36,7 @@ function PostShow(props) {
         }
         setIsLoading(false);
       });
-  }, [match.params.id]);
+  }, []);
 
   if (isLoading)
     return (
@@ -62,7 +62,7 @@ function PostShow(props) {
         >
           <List.Item.Meta
             avatar={<Avatar src={user.image.url} />}
-            title={<p>{post.title}</p>}
+            title={<p>{post.title} / {post.category.name}</p>}
             description={<p>by {user.name}</p>}
           />
           {post.content}

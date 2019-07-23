@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { postService } from "../../_services/post_service";
 import { authenticationHelper } from "../../_helpers/auth_helpers";
-
+import CategorySelect from "../shared/CategorySelect";
 import { Form, Input, Button, Alert } from "antd";
 const { TextArea } = Input;
 
@@ -11,7 +11,7 @@ function PostForm(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [file, setFile] = useState(null);
-
+  const [categoryId, setCategoryId] = useState(null)
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -46,15 +46,13 @@ function PostForm(props) {
     setIsLoading(true);
 
     postService
-      .create(title, content, file)
+      .create(title, content, file, categoryId)
       .then(response => {
-        console.log(response);
         authenticationHelper.handleTokenChange(response);
         setIsLoading(false);
-        props.history.push("/");
+        props.history.push(`/posts/${response.data.post.id}`);
       })
       .catch(error => {
-        console.log(error.response);
         authenticationHelper.handleTokenChange(error.response);
         setIsLoading(false);
         const errors_messages = error.response.data.errors;
@@ -108,7 +106,10 @@ function PostForm(props) {
         <Form.Item label="Image:">
           <Input type="file" onChange={handleFileChange} />
         </Form.Item>
-
+        
+        <Form.Item label="Category:">
+          <CategorySelect handleCategoryChange={id => setCategoryId(id)}/>
+        </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" loading={isLoading}>
             Create new post

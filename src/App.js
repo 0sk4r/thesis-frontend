@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import SignIn from "./components/SignIn";
 import LogIn from "./components/LogIn";
@@ -8,6 +8,8 @@ import Header from "./components/Header";
 import PostForm from "./components/Post/PostForm";
 import PostList from "./components/Post/PostList";
 import PostShow from "./components/Post/PostShow";
+import PostEditForm from "./components/Post/PostEditForm";
+import UserEditForm from "./components/User/UserEditForm";
 import "./App.css";
 import { Layout } from "antd";
 import { AuthProvider } from "./_helpers/auth_context";
@@ -27,8 +29,12 @@ class App extends React.Component {
                 <Route path="/signin" component={SignIn} />
                 <Route path="/login" component={LogIn} />
                 <Route path="/logout" component={LogOut} />
-                <Route path="/posts/:id" component={PostShow} />
-                <PrivateRoute path="/posts/new" component={PostForm} />
+                <Switch>
+                  <PrivateRoute path="/posts/new" component={PostForm} />
+                  <Route path="/posts/:id/edit" component={PostEditForm} />
+                  <Route path="/posts/:id" component={PostShow} />
+                </Switch>
+                <Route path="/users/edit" component={UserEditForm}/>
               </div>
             </Content>
 

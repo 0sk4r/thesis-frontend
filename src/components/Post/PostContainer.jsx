@@ -25,7 +25,7 @@ function PostContainer(props) {
         avatar={<Avatar src={post.user.image.url} />}
         title={
           <Link to={"/posts/" + post.id}>
-            <p>{post.title}</p>
+            <p>{post.title} / {post.category.name}</p>
           </Link>
         }
         description={<p>by {post.user.name}</p>}
