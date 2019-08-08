@@ -5,7 +5,8 @@ const axios = require("axios");
 export const userService = {
   find,
   edit,
-  update
+  update,
+  getInfo
 };
 
 function find(key) {
@@ -18,13 +19,17 @@ function edit() {
   });
 }
 function update(name, nickname, image) {
-  console.log(`${name},${nickname}`)
   let data = new FormData();
   data.append("nickname", nickname);
   data.append("name", name);
   data.append("image", image);
 
   return axios.patch("/api/users/edit", data, {
+    headers: authenticationHelper.getHeaders()
+  });
+}
+function getInfo() {
+  return axios.get("/api/users/getInfo", {
     headers: authenticationHelper.getHeaders()
   });
 }

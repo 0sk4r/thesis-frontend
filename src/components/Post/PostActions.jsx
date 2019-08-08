@@ -8,7 +8,7 @@ function PostActions(post) {
   return ([
       <LikeButton post={post} />,
       <DislikeButton post={post} />,
-      <IconButton type="message" text={post.comment_length} />]
+      <IconButton type="message" text={post.comment_count} />]
   );
 }
 

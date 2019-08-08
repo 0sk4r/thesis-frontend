@@ -1,24 +1,16 @@
 import React from "react";
-import { List, Avatar, Icon } from "antd";
+import { List, Avatar} from "antd";
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import PostActions from "./PostActions";
 
-const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
 
 function PostContainer(props) {
   const { post } = props;
   return (
     <List.Item
       key={post.id}
-      actions={[
-        <IconText type="like" text={post.likes} />,
-        <IconText type="dislike" text={post.dislikes} />,
-        <IconText type="message" text={post.comment_count} />
-      ]}
+      actions={PostActions(post)}
       extra={<img width={272} alt="logo" src={post.image.url} />}
     >
       <List.Item.Meta
@@ -30,7 +22,7 @@ function PostContainer(props) {
         }
         description={<p>by {post.user.name}</p>}
       />
-      {post.content}
+      <ReactMarkdown source={post.content}/>
     </List.Item>
   );
 }

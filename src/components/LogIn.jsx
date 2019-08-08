@@ -42,6 +42,7 @@ class LogIn extends React.Component {
         this.props.history.push("/");
       })
       .catch(error => {
+        console.log(error.response)
         this.setState({ isLoading: false });
         const errors_messages = error.response.data.errors;
         this.setState({ errors: errors_messages });

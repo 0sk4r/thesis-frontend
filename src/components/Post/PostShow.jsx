@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { postService } from "../../_services/post_service";
-import { List, Alert, Avatar} from "antd";
+import { List, Alert} from "antd";
 import CommentComponent from "../Comment/CommentComponent";
-import PostActions from "./PostActions"
+import PostContainer from "./PostContainer";
 
 function PostShow(props) {
   const { match } = props;
@@ -36,7 +36,7 @@ function PostShow(props) {
         }
         setIsLoading(false);
       });
-  }, []);
+  }, [match.params.id]);
 
   if (isLoading)
     return (
@@ -55,18 +55,7 @@ function PostShow(props) {
   return (
     <React.Fragment>
       <List itemLayout="vertical" size="large" loading={isLoading}>
-        <List.Item
-          key={post.id}
-          actions={PostActions(post)}
-          extra={<img width={272} alt="logo" src={post.image.url} />}
-        >
-          <List.Item.Meta
-            avatar={<Avatar src={user.image.url} />}
-            title={<p>{post.title} / {post.category.name}</p>}
-            description={<p>by {user.name}</p>}
-          />
-          {post.content}
-        </List.Item>
+        <PostContainer post={post}/>
       </List>
       <CommentComponent post_id={post.id} comments={comments} />
     </React.Fragment>
