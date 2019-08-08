@@ -6,14 +6,12 @@ import { userService } from "../../_services/user_service";
 const { SubMenu } = Menu;
 
 function UserMenu(props) {
-  const [name, setName] = useState("");
   const [nick, setNick] = useState("");
   const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
     userService.getInfo().then(response => {
       const user = response.data;
-      setName(user.name);
       setNick(user.nickname);
       setAvatar(user.image.url);
     });

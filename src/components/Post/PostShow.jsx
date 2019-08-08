@@ -7,7 +7,6 @@ import PostContainer from "./PostContainer";
 function PostShow(props) {
   const { match } = props;
   const [post, setPost] = useState({});
-  const [user, setUser] = useState({});
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState("");
@@ -19,7 +18,6 @@ function PostShow(props) {
       .get(match.params.id)
       .then(response => {
         setPost(response.data);
-        setUser(response.data.user);
         setComments(response.data.comment);
         setIsLoading(false);
       })
