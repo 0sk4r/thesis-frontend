@@ -1,7 +1,7 @@
 import React from "react";
 
-import { authenticationService } from "../_services/authentication_service";
-import { AuthContext } from "../_helpers/auth_context";
+import { authenticationService } from "_services/authentication_service";
+import { AuthContext } from "_helpers/auth_context";
 
 import { Form, Input, Button, Alert} from "antd";
 

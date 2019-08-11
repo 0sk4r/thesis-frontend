@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { postService } from "../../_services/post_service";
-import { authenticationHelper } from "../../_helpers/auth_helpers";
+import { postService } from "_services/post_service";
+import { authenticationHelper } from "_helpers/auth_helpers";
 import CategorySelect from "../shared/CategorySelect";
 import { Form, Input, Button, Alert } from "antd";
 const { TextArea } = Input;

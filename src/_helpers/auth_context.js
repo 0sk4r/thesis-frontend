@@ -1,6 +1,6 @@
 import React from "react";
 import { authenticationService } from "../_services/authentication_service";
-
+import { authenticationHelper } from "_helpers/auth_helpers";
 const AuthContext = React.createContext();
 
 class AuthProvider extends React.Component {
@@ -14,23 +14,28 @@ class AuthProvider extends React.Component {
 
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-  }
-
-  componentDidMount() {
+    console.log("test")
     if (localStorage.getItem("user")) {
+      console.log("123")
       authenticationService
         .validate()
-        .then(response => {
+        .then(() => {
           this.setState({
             isAuth: true,
-            user: JSON.parse(localStorage.getItem("user"))
+            user: JSON.parse(localStorage.getItem("user")),
           });
+
         })
         .catch(error => {
+          authenticationHelper.handleTokenChange(error.response)
+          console.log(error)
           this.logout();
           localStorage.removeItem("user");
         });
     }
+  }
+
+  componentDidMount() {
   }
 
   login(user) {

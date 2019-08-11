@@ -1,7 +1,7 @@
 import React from "react";
-import { authenticationService } from "../_services/authentication_service";
+import { authenticationService } from "_services/authentication_service";
 import { Form, Input, Button, Alert } from "antd";
-import { AuthContext } from "../_helpers/auth_context";
+import { AuthContext } from "_helpers/auth_context";
 
 class LogIn extends React.Component {
   constructor(props) {

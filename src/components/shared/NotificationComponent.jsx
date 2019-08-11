@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Dropdown, Icon, Menu, Button } from "antd";
-import { notificationService } from "../../_services/notification_service";
-import { authenticationHelper } from "../../_helpers/auth_helpers";
+import { notificationService } from "_services/notification_service";
+import { authenticationHelper } from "_helpers/auth_helpers";
 import MentionNotification from "../Notifications/MentionNotification";
 
 function NotificationComponent(props) {
@@ -60,14 +60,13 @@ function NotificationComponent(props) {
           handleDeleteNotification={handleDeleteNotification}
         />
       ))}
-      <Menu.Item>
+      <Menu.Item key="dlkajslkjdlka">
         <Button type="danger" shape="round" icon="delete" onClick={() => handleDeleteAll()}>
           Delete all!
         </Button>
       </Menu.Item>
     </Menu>
   );
-  console.log(notifications);
   return (
     <Dropdown overlay={menu}>
       <Badge count={count}>

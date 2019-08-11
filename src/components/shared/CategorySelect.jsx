@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Form, Select } from "antd";
-import { categoryService } from "../../_services/category_service";
-import { authenticationHelper } from "../../_helpers/auth_helpers";
+import { categoryService } from "_services/category_service";
+import { authenticationHelper } from "_helpers/auth_helpers";
 
 const { Option } = Select;
 

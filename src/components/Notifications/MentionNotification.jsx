@@ -14,7 +14,7 @@ function MentionNotification(props) {
   };
 
   return (
-    <Menu.Item {...props} key={notification.id} style={style}>
+    <Menu.Item {...props} style={style}>
       <Row>
         <Col span={20}>
           <Link to={`/posts/${comment.post.id}#${comment.id}`}>

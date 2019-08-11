@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { postService } from "../../_services/post_service";
+import { postService } from  "_services/post_service";
 import PostContainer from "./PostContainer";
 import { List, Alert } from "antd";
 

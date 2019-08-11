@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { postService } from "../../_services/post_service";
-import { authenticationHelper } from "../../_helpers/auth_helpers";
+import { postService } from "_services/post_service";
+import { authenticationHelper } from "_helpers/auth_helpers";
 
 import CategorySelect from "../shared/CategorySelect";
 import { Form, Input, Button, Alert } from "antd";
@@ -44,6 +44,7 @@ function PostEditForm(props) {
     postService
       .edit(match.params.id)
       .then(response => {
+        console.log(response.data)
         authenticationHelper.handleTokenChange(response);
         const post = response.data;
 

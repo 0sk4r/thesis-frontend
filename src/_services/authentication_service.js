@@ -40,7 +40,7 @@ function signin(email, nick, name, password, password_confirmation, image) {
   data.append('name', name);
   data.append('password', password);
   data.append('password_confirmation', password_confirmation);
-  data.append('confirm_success_url', "http://localhost:3000/");
+  data.append('confirm_success_url', "http://localhost:3001/");
   data.append('image', image);
 
   return axios.post("/auth/", data);

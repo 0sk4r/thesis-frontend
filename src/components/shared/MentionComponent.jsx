@@ -1,6 +1,6 @@
 import React from "react";
 import { Mentions } from "antd";
-import { userService } from "../../_services/user_service";
+import { userService } from "_services/user_service";
 const { Option } = Mentions;
 
 class MentionComponent extends React.Component {

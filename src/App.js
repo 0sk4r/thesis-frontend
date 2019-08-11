@@ -28,13 +28,13 @@ class App extends React.Component {
                 <Route path="/" exact component={PostList} />
                 <Route path="/signin" component={SignIn} />
                 <Route path="/login" component={LogIn} />
-                <Route path="/logout" component={LogOut} />
+                <PrivateRoute path="/logout" component={LogOut} />
                 <Switch>
                   <PrivateRoute path="/posts/new" component={PostForm} />
-                  <Route path="/posts/:id/edit" component={PostEditForm} />
+                  <PrivateRoute path="/posts/:id/edit" component={PostEditForm} />
                   <Route path="/posts/:id" component={PostShow} />
                 </Switch>
-                <Route path="/users/edit" component={UserEditForm}/>
+                <PrivateRoute path="/users/edit" component={UserEditForm}/>
               </div>
             </Content>
 

@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import IconButton from "../shared/IconButton";
+import IconButton from "components/shared/IconButton";
 import LikeButton from "./LikeButton"
 import DislikeButton from "./DislikeButton"
-import { likeService } from "../../_services/like_service";
-import { authenticationHelper } from "../../_helpers/auth_helpers";
+import { likeService } from "_services/like_service";
+import { authenticationHelper } from "_helpers/auth_helpers";
 
 function PostActions(post) {
   const [likes, setLikes] = useState(post.likes);

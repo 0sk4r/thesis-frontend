@@ -1,6 +1,6 @@
 import React from "react";
-import { AuthContext } from "../_helpers/auth_context";
-import { authenticationService } from "../_services/authentication_service";
+import { AuthContext } from "_helpers/auth_context";
+import { authenticationService } from "_services/authentication_service";
 import { Spin, Alert } from "antd";
 
 class LogOut extends React.Component {
