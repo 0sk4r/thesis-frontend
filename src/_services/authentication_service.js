@@ -9,7 +9,7 @@ export const authenticationService = {
 
 function login(email, password) {
   return axios
-    .post("http://localhost:3000/auth/sign_in", {
+    .post("/auth/sign_in", {
       email: email,
       password: password
     })

@@ -1,0 +1,20 @@
+{
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  },
+  "proxies": {
+    "/api/": {
+      "origin": "${API_URL}/api"
+    },
+    "/auth/": {
+      "origin": "${API_URL}/auth"
+    },
+    "/images/": {
+      "origin": "${API_URL}/images"
+    },
+    "/uploads/": {
+      "origin": "${API_URL}/uploads"
+    }
+  }
+}
