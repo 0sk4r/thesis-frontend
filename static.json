@@ -9,6 +9,9 @@
     },
     "/auth/": {
       "origin": "${API_URL}/auth"
+    },
+    "/images/": {
+      "origin": "${API_URL}/images"
     }
   }
 }
