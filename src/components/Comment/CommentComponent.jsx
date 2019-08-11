@@ -1,10 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import CommentForm from "./CommentForm";
 import { List } from "antd";
 import CommentShow from "./CommentShow";
+import { AuthContext } from "_helpers/auth_context";
 
 function CommentComponent(props) {
   const { post_id, comments } = props;
+  const context = useContext(AuthContext);
+
   return (
     <React.Fragment>
       <List
@@ -18,8 +21,7 @@ function CommentComponent(props) {
           </li>
         )}
       />
-
-      <CommentForm post_id={post_id} />
+      {context.isAuth ? <CommentForm post_id={post_id} /> : null}
     </React.Fragment>
   );
 }
