@@ -28,7 +28,7 @@ class LogIn extends React.Component {
       this.props.history.push("/");
     }
   }
-  
+
   handleSubmit(e) {
     e.preventDefault();
     this.setState({ isLoading: true });
@@ -42,10 +42,17 @@ class LogIn extends React.Component {
         this.props.history.push("/");
       })
       .catch(error => {
-        console.log(error.response)
-        this.setState({ isLoading: false });
-        const errors_messages = error.response.data.errors;
-        this.setState({ errors: errors_messages });
+        if (error.response) {
+          let error_messages = "";
+          if (error.response.status === 500) {
+            error_messages = "Something went wrong. Try again later";
+          } else {
+            error_messages = error.response.data.errors.full_messages;
+          }
+          this.setState({ isLoading: false, errors: error_messages });
+        } else if (error.request) {
+          this.setState({ isLoading: false, errors: "Backend not responding" });
+        }
       });
   }
 

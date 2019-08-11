@@ -18,9 +18,15 @@ function PostList(props) {
       })
       .catch(error => {
         setIsLoading(false);
-
         if (error.response) {
-          const error_messages = error.response.data.errors.full_messages;
+          let error_messages = "";
+          if (error.response.status === 500) {
+            error_messages = "Backend not responding"
+          }
+          else {
+            error_messages = error.response.data.errors.full_messages;
+
+          }
           setErrors(error_messages);
         } else if (error.request) {
           setErrors("Something went wrong. Try again later.");
