@@ -2,7 +2,7 @@
   "name": "thesis-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
+  "proxy": "http://gentle-forest-57977.herokuapp.com",
   "dependencies": {
     "antd": "^3.16.6",
     "axios": "^0.18.0",
