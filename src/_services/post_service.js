@@ -49,8 +49,8 @@ function update(title, content,file, category, postId) {
     )
 }
 
-function getAll() {
-  return axios.get("/api/posts/")
+function getAll(page) {
+  return axios.get(`/api/posts/page/${page}`)
 }
 
 function get(id){
