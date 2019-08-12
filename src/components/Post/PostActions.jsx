@@ -2,10 +2,11 @@ import React, { useState, useContext } from "react";
 import IconButton from "components/shared/IconButton";
 import LikeButton from "./LikeButton";
 import DislikeButton from "./DislikeButton";
+import EditButton from "components/shared/EditButton";
 import { likeService } from "_services/like_service";
 import { authenticationHelper } from "_helpers/auth_helpers";
 import { AuthContext } from "_helpers/auth_context";
-import ErrorMessage from "components/shared/ErrorMessage"
+import ErrorMessage from "components/shared/ErrorMessage";
 
 function PostActions(post) {
   const [likes, setLikes] = useState(post.likes);
@@ -37,7 +38,8 @@ function PostActions(post) {
       dislikes={dislikes}
       handleLike={() => handleLike(post.id, 1)}
     />,
-    <IconButton type="message" text={post.comment_count} />
+    <IconButton type="message" text={post.comment_count} />,
+    <EditButton post_id={post.id} />
   ];
 }
 

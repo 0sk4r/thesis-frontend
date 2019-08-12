@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { postService } from "_services/post_service";
-import PostListContainer from "./PostListContainer";
+import { categoryService } from "_services/category_service";
+import PostListContainer from "components/Post/PostListContainer";
 
-function PostList(props) {
+function CategoryShow(props) {
+  const { match } = props;
   const [posts, setPosts] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
-    postService
-      .getAll()
+    categoryService
+      .show(match.params.id)
       .then(response => {
         setIsLoading(false);
-        setPosts(response.data);
+        setPosts(response.data.posts);
+        setCategoryName(response.data.name);
       })
       .catch(error => {
         setIsLoading(false);
@@ -29,11 +32,14 @@ function PostList(props) {
           setErrors("Something went wrong. Try again later.");
         }
       });
-  }, []);
+  }, [match.params.id]);
 
   return (
-    <PostListContainer posts={posts} isLoading={isLoading} errors={errors} />
+    <React.Fragment>
+      <h1>{"Post from category " + categoryName}</h1>
+      <PostListContainer posts={posts} isLoading={isLoading} errors={errors} />
+    </React.Fragment>
   );
 }
 
-export default PostList;
+export default CategoryShow;

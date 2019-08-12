@@ -6,6 +6,7 @@ import { AuthContext } from "../_helpers/auth_context";
 import NotificationComponent from "./shared/NotificationComponent"
 import UserMenu from "./User/UserMenu"
 import LoginMenu from "./shared/LoginMenu";
+import CategoryMenu from "./Category/CategoryMenu";
 const { Header } = Layout;
 
 function CustomHeader(props) {
@@ -24,6 +25,7 @@ function CustomHeader(props) {
             <img src={Logo} style={{ height: "54px" }} alt="Home" />
           </Link>
         </Menu.Item>
+        <CategoryMenu/>
 
         {context.isAuth ? (
           [<Menu.Item key="/posts/new">
@@ -33,8 +35,8 @@ function CustomHeader(props) {
             <NotificationComponent/>
           </Menu.Item>,
           <UserMenu style={style}/>]
-        ) : (
-          [
+          ) : (
+            [
             <LoginMenu style={style}/>
           ]
           )}

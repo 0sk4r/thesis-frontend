@@ -15,7 +15,7 @@ function PostEditForm(props) {
   const [error, setError] = useState("");
   const [file, setFile] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
-  
+
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -44,7 +44,7 @@ function PostEditForm(props) {
     postService
       .edit(match.params.id)
       .then(response => {
-        console.log(response.data)
+        console.log(response.data);
         authenticationHelper.handleTokenChange(response);
         const post = response.data;
 
@@ -61,11 +61,9 @@ function PostEditForm(props) {
 
         if (response.status === 404) {
           setError("Post for edition not found");
-        }
-        else if (response.status === 401){
+        } else if (response.status === 401) {
           setError("You are not allowed to do this");
-        }
-        else {
+        } else {
           const errors_messages = error.response.data.errors;
           setError(errors_messages);
         }
@@ -153,10 +151,12 @@ function PostEditForm(props) {
               <Input type="file" onChange={handleFileChange} />
             </Form.Item>
 
-            <CategorySelect
-              handleCategoryChange={id => setCategoryId(id)}
-              defaultValue={categoryId}
-            />
+            <Form.Item label="Category:">
+              <CategorySelect
+                handleCategoryChange={id => setCategoryId(id)}
+                defaultValue={categoryId}
+              />
+            </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
               <Button type="primary" htmlType="submit" loading={isLoading}>

@@ -98,6 +98,7 @@ function PostForm(props) {
             <TextArea
               rows={10}
               name="content"
+              placeholder="You can use Markdown."
               onChange={e => setContent(e.target.value)}
             />
           )}

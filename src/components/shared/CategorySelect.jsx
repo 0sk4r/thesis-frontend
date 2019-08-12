@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {Form, Select } from "antd";
+import { Form, Select } from "antd";
 import { categoryService } from "_services/category_service";
-import { authenticationHelper } from "_helpers/auth_helpers";
 
 const { Option } = Select;
 
@@ -10,14 +9,12 @@ function CategorySelect(props) {
   const { getFieldDecorator } = props.form;
   useEffect(() => {
     categoryService.index().then(response => {
-      authenticationHelper.handleTokenChange(response);
-      console.log(response.data);
       setCategories(response.data);
     });
   }, []);
 
   return (
-    <Form.Item label="Category:">
+    <Form.Item>
       {getFieldDecorator("category", {
         initialValue: props.defaultValue
       })(
@@ -44,4 +41,3 @@ function CategorySelect(props) {
 
 const WrappedCategorySelect = Form.create({ name: "new" })(CategorySelect);
 export default WrappedCategorySelect;
-
