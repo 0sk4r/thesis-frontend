@@ -42,12 +42,13 @@ class LogIn extends React.Component {
         this.props.history.push("/");
       })
       .catch(error => {
+        console.log(error.response)
         if (error.response) {
           let error_messages = "";
           if (error.response.status === 500) {
             error_messages = "Something went wrong. Try again later";
           } else {
-            error_messages = error.response.data.errors.full_messages;
+            error_messages = error.response.data.errors;
           }
           this.setState({ isLoading: false, errors: error_messages });
         } else if (error.request) {
