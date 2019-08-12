@@ -14,29 +14,27 @@ class AuthProvider extends React.Component {
 
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
-    console.log("test")
     if (localStorage.getItem("user")) {
-      console.log("123")
       authenticationService
         .validate()
         .then(() => {
+          const user = JSON.parse(localStorage.getItem("user"));
           this.setState({
             isAuth: true,
-            user: JSON.parse(localStorage.getItem("user")),
+            user: user,
+            id: user.id
           });
-
         })
         .catch(error => {
-          authenticationHelper.handleTokenChange(error.response)
-          console.log(error)
+          authenticationHelper.handleTokenChange(error.response);
+          console.log(error);
           this.logout();
           localStorage.removeItem("user");
         });
     }
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   login(user) {
     this.setState({
@@ -57,6 +55,7 @@ class AuthProvider extends React.Component {
         value={{
           isAuth: this.state.isAuth,
           user: this.state.user,
+          id: this.state.id,
           loginContext: this.login,
           logoutContext: this.logout
         }}

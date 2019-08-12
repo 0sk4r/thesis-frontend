@@ -39,7 +39,7 @@ function PostActions(post) {
       handleLike={() => handleLike(post.id, 1)}
     />,
     <IconButton type="message" text={post.comment_count} />,
-    <EditButton post_id={post.id} />
+    <EditButton post={post} />
   ];
 }
 

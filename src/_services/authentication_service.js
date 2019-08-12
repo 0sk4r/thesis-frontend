@@ -21,13 +21,14 @@ function login(email, password) {
       const expiry = headers["expiry"];
       const uid = headers["uid"];
 
-      const user = JSON.stringify({
+      const user = {
         access_token: access_token,
         client: client,
         expiry: expiry,
-        uid: uid
-      });
-      localStorage.setItem("user", user);
+        uid: uid,
+        id: response.data.data.id
+      };
+      localStorage.setItem("user", JSON.stringify(user));
 
       return user;
     });
@@ -35,13 +36,13 @@ function login(email, password) {
 
 function signin(email, nick, name, password, password_confirmation, image) {
   let data = new FormData();
-  data.append('email', email);
-  data.append('nickname', nick);
-  data.append('name', name);
-  data.append('password', password);
-  data.append('password_confirmation', password_confirmation);
-  data.append('confirm_success_url', "http://localhost:3001/");
-  data.append('image', image);
+  data.append("email", email);
+  data.append("nickname", nick);
+  data.append("name", name);
+  data.append("password", password);
+  data.append("password_confirmation", password_confirmation);
+  data.append("confirm_success_url", "http://localhost:3001/");
+  data.append("image", image);
 
   return axios.post("/auth/", data);
 }
