@@ -5,10 +5,12 @@ import { AuthContext } from "_helpers/auth_context";
 
 import { Form, Input, Button, Alert } from "antd";
 
+// Component handling SignIn action
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
+    // When user is logged redirect to root
     if (authenticationService.currentUserValue) {
       this.props.history.push("/");
     }
@@ -29,16 +31,19 @@ class SignIn extends React.Component {
     this.handleFileChange = this.handleFileChange.bind(this);
   }
 
+  // Handle form input change
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
 
+  // Handle change of avatar
   handleFileChange(e) {
     this.setState({ file: e.target.files[0] });
     return false;
   }
 
+  // Post data to server
   handleSubmit(e) {
     e.preventDefault();
 

@@ -3,12 +3,14 @@ import { authenticationService } from "../_services/authentication_service";
 import { authenticationHelper } from "_helpers/auth_helpers";
 const AuthContext = React.createContext();
 
+// Context providing info about logged user
 class AuthProvider extends React.Component {
   state = {
     isAuth: false,
     user: {}
   };
 
+  // On creating check if stored tokens are valid
   constructor(props) {
     super(props);
 
@@ -18,6 +20,7 @@ class AuthProvider extends React.Component {
       authenticationService
         .validate()
         .then(() => {
+          // if token is valid auth user in cotext
           const user = JSON.parse(localStorage.getItem("user"));
           this.setState({
             isAuth: true,
@@ -26,8 +29,8 @@ class AuthProvider extends React.Component {
           });
         })
         .catch(error => {
+          // if token is invalid remove it from localstorage and logout in context
           authenticationHelper.handleTokenChange(error.response);
-          console.log(error);
           this.logout();
           localStorage.removeItem("user");
         });
@@ -36,13 +39,14 @@ class AuthProvider extends React.Component {
 
   componentDidMount() {}
 
+  // Set login data
   login(user) {
     this.setState({
       isAuth: true,
       user: user
     });
   }
-
+  // Remove data form context after logout
   logout() {
     this.setState({
       isAuth: false,

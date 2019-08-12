@@ -3,6 +3,7 @@ import { authenticationService } from "_services/authentication_service";
 import { Form, Input, Button, Alert } from "antd";
 import { AuthContext } from "_helpers/auth_context";
 
+// Component handling Login action
 class LogIn extends React.Component {
   constructor(props) {
     super(props);
@@ -18,11 +19,13 @@ class LogIn extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // Handle input change
   handleChange(e) {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   }
 
+  // If user is logged redirect to root
   componentDidMount() {
     if (this.context.isAuth) {
       this.props.history.push("/");
@@ -38,7 +41,9 @@ class LogIn extends React.Component {
       .login(email, password)
       .then(user => {
         this.setState({ isLoading: false });
+        // Login user in context
         this.context.loginContext(user);
+        // Redirect to root after login
         this.props.history.push("/");
       })
       .catch(error => {

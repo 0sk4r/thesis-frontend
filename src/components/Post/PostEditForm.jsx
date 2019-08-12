@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { postService } from "_services/post_service";
 import { authenticationHelper } from "_helpers/auth_helpers";
 
-import CategorySelect from "../shared/CategorySelect";
+import CategorySelect from "../Category/CategorySelect";
 import { Form, Input, Button, Alert } from "antd";
 const { TextArea } = Input;
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { Icon } from "antd";
 
+// Button with text
 const IconText = ({ type, text, color }) => (
   <span>
     <Icon

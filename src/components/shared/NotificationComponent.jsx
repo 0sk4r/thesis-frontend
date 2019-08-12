@@ -4,10 +4,13 @@ import { notificationService } from "_services/notification_service";
 import { authenticationHelper } from "_helpers/auth_helpers";
 import MentionNotification from "../Notifications/MentionNotification";
 
+// Component displaying dropdown with user notification list
 function NotificationComponent(props) {
+  // count of all notification. Dissplaying on badge
   const [count, setCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
 
+  // fetch data
   useEffect(() => {
     notificationService
       .index()
@@ -15,40 +18,36 @@ function NotificationComponent(props) {
         authenticationHelper.handleTokenChange(response);
         setCount(response.data.length);
         setNotifications(response.data);
-        console.log(response.data);
       })
       .catch(error => {
         authenticationHelper.handleTokenChange(error.response);
       });
   }, []);
 
+  // Function handle delete of single notification
   function handleDeleteNotification(id) {
     notificationService
       .destroy(id)
       .then(response => {
         authenticationHelper.handleTokenChange(response);
-        console.log(response.data);
         setNotifications(response.data);
         setCount(response.data.length);
       })
       .catch(error => {
         authenticationHelper.handleTokenChange(error.response);
-        console.log(error.response);
       });
   }
-
+  // Handle delete of all notification
   function handleDeleteAll() {
     notificationService
       .delete_all()
       .then(response => {
         authenticationHelper.handleTokenChange(response);
-        console.log(response.data);
         setNotifications(response.data);
         setCount(response.data.length);
       })
       .catch(error => {
         authenticationHelper.handleTokenChange(error.response);
-        console.log(error.response);
       });
   }
 

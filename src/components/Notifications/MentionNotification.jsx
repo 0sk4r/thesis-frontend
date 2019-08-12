@@ -2,7 +2,9 @@ import React from 'react'
 import {Menu, Row, Col, Button} from "antd";
 import {Link} from "react-router-dom";
 
+// Component displaying mention notification
 function MentionNotification(props) {
+  // COMMENT_LENGTH decide how long comment quote will be in notification
   const COMMENT_LENGTH = 4;
   const notification = props.notification;
   const comment = notification.action.comment;

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const { SubMenu } = Menu;
 
+// Menu component with authentication action for not logged in user
 function LoginMenu(props) {
 
   return (

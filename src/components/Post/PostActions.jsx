@@ -8,26 +8,28 @@ import { authenticationHelper } from "_helpers/auth_helpers";
 import { AuthContext } from "_helpers/auth_context";
 import ErrorMessage from "components/shared/ErrorMessage";
 
+// Component displaying additional info about post (likes,dislikes, comment count) and button for like action and edit
 function PostActions(post) {
   const [likes, setLikes] = useState(post.likes);
   const [dislikes, setDislikes] = useState(post.dislikes);
   const context = useContext(AuthContext);
 
+  // Create like in backend when button pressed. Like type 0: positive. Like type 1: negative.
   function handleLike(post_id, type) {
+    // Check if user is logged
     if (context.isAuth) {
       likeService
         .create(post_id, type)
         .then(response => {
-          console.log(response);
           authenticationHelper.handleTokenChange(response);
           setLikes(response.data.likes);
           setDislikes(response.data.dislikes);
         })
         .catch(error => {
-          console.log(error.response);
           authenticationHelper.handleTokenChange(error.response);
         });
     } else {
+      // if user is not logged display error message
       ErrorMessage("Please log in to vote");
     }
   }

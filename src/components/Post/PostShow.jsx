@@ -4,6 +4,7 @@ import { List, Alert } from "antd";
 import CommentComponent from "../Comment/CommentComponent";
 import PostContainer from "./PostContainer";
 
+// Component responsible for displaying post and comments
 function PostShow(props) {
   const { match } = props;
   const [post, setPost] = useState({});
@@ -11,6 +12,7 @@ function PostShow(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState("");
 
+  // Fetch post data from backend
   useEffect(() => {
     setIsLoading(true);
 
@@ -36,13 +38,15 @@ function PostShow(props) {
       });
   }, [match.params.id]);
 
+  // Display loading status until fetch end
   if (isLoading)
     return (
       <div>
         <h1>Loading...</h1>
       </div>
     );
-
+  
+  // Display error message
   if (errors)
     return (
       <div>
@@ -55,6 +59,7 @@ function PostShow(props) {
       <List itemLayout="vertical" size="large" loading={isLoading}>
         <PostContainer post={post} />
       </List>
+      {/* Pass comment data */}
       <CommentComponent post_id={post.id} comments={comments} />
     </React.Fragment>
   );

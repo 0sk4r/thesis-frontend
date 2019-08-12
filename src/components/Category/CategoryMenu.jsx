@@ -5,9 +5,11 @@ import { categoryService } from "_services/category_service";
 
 const { SubMenu } = Menu;
 
+// Menu with link to categories
 function CategoryMenu(props) {
   const [categories, setCategories] = useState([]);
 
+  // Fetch data
   useEffect(() => {
     categoryService.index().then(response => {
       setCategories(response.data);
@@ -18,6 +20,7 @@ function CategoryMenu(props) {
     <SubMenu title={<span>Category</span>} style={props.style} {...props}>
       {categories.map(category => (
         <Menu.Item key={category.name}>
+          {/* Link redirect to post from selected category */}
           <Link to={`/categories/${category.id}`}>{category.name}</Link>
         </Menu.Item>
       ))}

@@ -3,7 +3,8 @@ import { Pagination } from "antd";
 import { postService } from "_services/post_service";
 import PostListContainer from "./PostListContainer";
 
-function PostList(props) {
+// Component responsible for present list of all posts
+function PostListComponent() {
   const [posts, setPosts] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(1);
@@ -11,6 +12,7 @@ function PostList(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState("");
 
+  // Fetch post list from backend with pagination. Refetch data when page change
   useEffect(() => {
     setIsLoading(true);
     postService
@@ -37,6 +39,7 @@ function PostList(props) {
       });
   }, [page]);
 
+  // Handle page change
   function onChange(page) {
     setPage(page);
   }
@@ -49,4 +52,4 @@ function PostList(props) {
   );
 }
 
-export default PostList;
+export default PostListComponent;

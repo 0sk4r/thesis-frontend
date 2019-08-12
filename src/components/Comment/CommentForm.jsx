@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router";
-
 import { Form, Button, Alert } from "antd";
 import MentionComponent from "../shared/MentionComponent";
-
 import { authenticationHelper } from "../../_helpers/auth_helpers";
-
 import { commentService } from "../../_services/comment_service";
 
+// Form for creating new comments
 function CommentForm(props) {
+  // post id of parent post
   const { post_id } = props;
 
   const { getFieldDecorator } = props.form;
@@ -17,6 +16,7 @@ function CommentForm(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  // Submit data to server
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -43,6 +43,7 @@ function CommentForm(props) {
   return (
     <React.Fragment>
       <div style={{ textAlign: "center" }}>
+        {/* Display error message from server */}
         {error && (
           <div>
             <Alert message="Error" description={error} type="error" showIcon />

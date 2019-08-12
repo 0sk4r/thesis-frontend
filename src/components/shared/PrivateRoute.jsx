@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AuthContext } from "_helpers/auth_context";
 
+// Component restrict access to component for unauth users
 function PrivateRoute({ component: Component, ...rest }) {
   const context =  useContext(AuthContext);
   const isAuth = useState(context.isAuth);

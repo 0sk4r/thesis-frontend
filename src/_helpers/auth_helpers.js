@@ -1,8 +1,10 @@
+// Set of fuctnions helping with authentication
 export const authenticationHelper = {
   handleTokenChange,
   getHeaders
 };
 
+// Return set of headers needed for authentication
 function getHeaders() {
   const user =  JSON.parse(localStorage.getItem("user"));
   return {
@@ -14,6 +16,7 @@ function getHeaders() {
   }
 }
 
+// Handling token change after requests
 function handleTokenChange(response) {
   const access_token = response.headers["access-token"];
   const expiry = response.headers["expiry"];

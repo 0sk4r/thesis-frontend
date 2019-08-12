@@ -5,6 +5,7 @@ import { userService } from "../../_services/user_service";
 
 const { SubMenu } = Menu;
 
+// Menu component displaying logout link and edit for user info
 function UserMenu(props) {
   const [nick, setNick] = useState("");
   const [avatar, setAvatar] = useState("");

@@ -4,6 +4,7 @@ import { List } from "antd";
 import CommentShow from "./CommentShow";
 import { AuthContext } from "_helpers/auth_context";
 
+// Show comment list and comment form for post
 function CommentComponent(props) {
   const { post_id, comments } = props;
   const context = useContext(AuthContext);
@@ -21,6 +22,7 @@ function CommentComponent(props) {
           </li>
         )}
       />
+      {/* Display form only if user is logged */}
       {context.isAuth ? <CommentForm post_id={post_id} /> : null}
     </React.Fragment>
   );

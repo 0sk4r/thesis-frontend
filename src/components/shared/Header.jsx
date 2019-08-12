@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../images/logo.png";
+import Logo from "../../images/logo.png";
 import { Layout, Menu } from "antd";
-import { AuthContext } from "../_helpers/auth_context";
-import NotificationComponent from "./shared/NotificationComponent"
-import UserMenu from "./User/UserMenu"
-import LoginMenu from "./shared/LoginMenu";
-import CategoryMenu from "./Category/CategoryMenu";
+import { AuthContext } from "../../_helpers/auth_context";
+import NotificationComponent from "./NotificationComponent"
+import UserMenu from "../User/UserMenu"
+import LoginMenu from "./LoginMenu";
+import CategoryMenu from "../Category/CategoryMenu";
 const { Header } = Layout;
 
+// Component that is displaying in header
 function CustomHeader(props) {
   const context = useContext(AuthContext);
   const style = { float: "right" };
@@ -20,6 +21,7 @@ function CustomHeader(props) {
         style={{ lineHeight: "64px" }}
         defaultSelectedKeys={["/"]}
       >
+        {/* Site logo is link to root */}
         <Menu.Item key="/">
           <Link to="/">
             <img src={Logo} style={{ height: "54px" }} alt="Home" />
@@ -27,6 +29,7 @@ function CustomHeader(props) {
         </Menu.Item>
         <CategoryMenu/>
 
+        {/* render menus depending on authentication status */}
         {context.isAuth ? (
           [<Menu.Item key="/posts/new">
             <Link to="/posts/new">Create new post</Link>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import PostActions from "./PostActions";
 
-
+// Component responsible for displaying single post
 function PostContainer(props) {
   const { post } = props;
   return (
@@ -22,6 +22,7 @@ function PostContainer(props) {
         }
         description={<p>by {post.user.name}</p>}
       />
+      {/* Render markdown */}
       <ReactMarkdown source={post.content}/>
     </List.Item>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { postService } from "_services/post_service";
 import { authenticationHelper } from "_helpers/auth_helpers";
-import CategorySelect from "../shared/CategorySelect";
+import CategorySelect from "../Category/CategorySelect";
 import { Form, Input, Button, Alert } from "antd";
 const { TextArea } = Input;
 
@@ -109,7 +109,7 @@ function PostForm(props) {
         </Form.Item>
         
         <Form.Item label="Category:">
-          <CategorySelect handleCategoryChange={id => setCategoryId(id)}/>
+          <CategorySelect handleCategoryChange={id => setCategoryId(id)} defaultValue={1}/>
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" loading={isLoading}>

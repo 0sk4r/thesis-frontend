@@ -3,6 +3,7 @@ import { AuthContext } from "_helpers/auth_context";
 import { authenticationService } from "_services/authentication_service";
 import { Spin, Alert } from "antd";
 
+// Componet responsible for logout
 class LogOut extends React.Component {
   constructor(props) {
     super(props);
@@ -22,8 +23,11 @@ class LogOut extends React.Component {
       .logout()
       .then(response => {
         this.setState({ isLoading: false });
+        // Logout user in cotext
         this.context.logoutContext();
+        // Redirect logout user to root
         this.props.history.push("/");
+        //  Remove data from localstorage
         localStorage.removeItem("user");
       })
       .catch(error => {

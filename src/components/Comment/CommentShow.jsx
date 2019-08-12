@@ -1,6 +1,7 @@
 import React from "react";
 import { Comment } from 'antd';
 
+// Componetn display single comment. Receive data in props
 function CommentShow(props){
   const {comment} = props;
 return(
