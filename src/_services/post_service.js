@@ -38,6 +38,7 @@ function edit(id){
 
 // Update post data
 function update(title, content,file, category, postId) {
+  console.log(file)
   let data = new FormData();
   data.append("title", title);
   data.append("content", content);

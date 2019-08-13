@@ -4,6 +4,7 @@ import { authenticationService } from "_services/authentication_service";
 import { AuthContext } from "_helpers/auth_context";
 
 import { Form, Input, Button, Alert } from "antd";
+import SingleFileUpload from "components/shared/SingleFileUpload";
 
 // Component handling SignIn action
 class SignIn extends React.Component {
@@ -218,7 +219,7 @@ class SignIn extends React.Component {
           </Form.Item>
 
           <Form.Item label="Avatar:">
-            <Input type="file" onChange={this.handleFileChange} />
+            <SingleFileUpload setFile={file => this.setState({file: file})} />
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>

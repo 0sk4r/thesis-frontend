@@ -6,7 +6,14 @@ import PostActions from "./PostActions";
 
 // Component responsible for displaying single post
 function PostContainer(props) {
-  const { post } = props;
+  const { post, shorten } = props;
+  let content = post.content
+  
+  // Shorten content depending on value from props
+  // used on main page
+  if (shorten){
+    content = content.substring(0, 1000);
+  }
   return (
     <List.Item
       key={post.id}
@@ -23,7 +30,7 @@ function PostContainer(props) {
         description={<p>by {post.user.name}</p>}
       />
       {/* Render markdown */}
-      <ReactMarkdown source={post.content}/>
+      <ReactMarkdown source={content}/>
     </List.Item>
   );
 }

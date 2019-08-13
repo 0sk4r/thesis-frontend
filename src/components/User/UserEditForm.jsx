@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Input, Form, Button, Alert, Avatar, Row, Col } from "antd";
 import { userService } from "../../_services/user_service";
 import { authenticationHelper } from "../../_helpers/auth_helpers";
+import SingleFileUpload from "components/shared/SingleFileUpload";
 
 function UserEditForm(props) {
   const { getFieldDecorator } = props.form;
@@ -12,6 +13,7 @@ function UserEditForm(props) {
   const [oldAvatar, setOldAvatar] = useState("")
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState("");
+  const [message, setMessage] = useState("")
 
   const formItemLayout = {
     labelCol: {
@@ -55,24 +57,22 @@ function UserEditForm(props) {
       });
   }, []);
 
-  function handleFileChange(e) {
-    setAvatar(e.target.files[0]);
-  }
-
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    console.log(`${nickname},${name}`);
+    setErrors("");
+    setMessage("")
     userService
       .update(name, nickname, avatar)
       .then(response => {
-        console.log(response.data);
         authenticationHelper.handleTokenChange(response);
         setIsLoading(false);
+        setMessage(response.data.message);
+        // this.props.history.push("/");
       })
       .catch(error => {
-        console.log(error.response);
         authenticationHelper.handleTokenChange(error.response);
+        setErrors(error.response.data.errors)
         setIsLoading(false);
       });
   }
@@ -84,6 +84,11 @@ function UserEditForm(props) {
         {errors && (
           <div>
             <Alert message="Error" description={errors} type="error" showIcon />
+          </div>
+        )}
+        {message && (
+          <div>
+            <Alert message="Success" description={message} type="success" showIcon />
           </div>
         )}
       </div>
@@ -114,7 +119,7 @@ function UserEditForm(props) {
           })(
             <Input
               name="nick"
-              onChange={value => setNickname(value)}
+              onChange={e => {setNickname(e.target.value)}}
               autoComplete="username"
             />
           )}
@@ -123,7 +128,7 @@ function UserEditForm(props) {
         <Form.Item label="Avatar:">
           <Row>
             <Col span={20}>
-          <Input type="file" onChange={handleFileChange} />
+            <SingleFileUpload setFile={setAvatar}/>
             </Col>
             <Col span={4}>
             <Avatar src={oldAvatar} size={64}  />
@@ -133,7 +138,7 @@ function UserEditForm(props) {
 
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" loading={isLoading}>
-            Register
+            Update
           </Button>
         </Form.Item>
       </Form>

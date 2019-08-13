@@ -12,7 +12,7 @@ function PostListContainer({ posts, isLoading, errors }) {
   ) : (
     <List itemLayout="vertical" size="large" loading={isLoading}>
       {posts.map(post => (
-        <PostContainer post={post} key={post.id} />
+        <PostContainer post={post} key={post.id} shorten={true}/>
       ))}
     </List>
   );

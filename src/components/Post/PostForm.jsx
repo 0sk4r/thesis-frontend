@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { postService } from "_services/post_service";
 import { authenticationHelper } from "_helpers/auth_helpers";
 import CategorySelect from "../Category/CategorySelect";
+import SingleFileUpload from "components/shared/SingleFileUpload";
 import { Form, Input, Button, Alert } from "antd";
 const { TextArea } = Input;
 
@@ -11,7 +12,7 @@ function PostForm(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [file, setFile] = useState(null);
-  const [categoryId, setCategoryId] = useState(null)
+  const [categoryId, setCategoryId] = useState(1);
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -35,11 +36,6 @@ function PostForm(props) {
       }
     }
   };
-
-  function handleFileChange(e) {
-    console.log(e.target.files);
-    setFile(e.target.files[0]);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -105,11 +101,14 @@ function PostForm(props) {
         </Form.Item>
 
         <Form.Item label="Image:">
-          <Input type="file" onChange={handleFileChange} />
+          <SingleFileUpload setFile={setFile} />
         </Form.Item>
-        
+
         <Form.Item label="Category:">
-          <CategorySelect handleCategoryChange={id => setCategoryId(id)} defaultValue={1}/>
+          <CategorySelect
+            handleCategoryChange={id => setCategoryId(id)}
+            defaultValue={1}
+          />
         </Form.Item>
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit" loading={isLoading}>
