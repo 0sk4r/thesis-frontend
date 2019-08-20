@@ -1,11 +1,8 @@
 import React from "react";
-import {authenticationService} from "../_services/authentication_service";
-import {authenticationHelper} from "_helpers/auth_helpers";
+import { authenticationService } from "../_services/authentication_service";
+import { authenticationHelper } from "_helpers/auth_helpers";
 
-const AuthContext = React.createContext({
-  isAuth: false,
-  user: {}
-});
+const AuthContext = React.createContext();
 
 // Context providing info about logged user
 class AuthProvider extends React.Component {
@@ -29,7 +26,8 @@ class AuthProvider extends React.Component {
           this.setState({
             isAuth: true,
             user: user,
-            id: user.id
+            id: user.id,
+            isLoading: false
           });
         })
         .catch(error => {
@@ -41,14 +39,14 @@ class AuthProvider extends React.Component {
     }
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   // Set login data
   login(user) {
     this.setState({
       isAuth: true,
-      user: user
+      user: user,
+      isLoading: false
     });
   }
 
@@ -56,7 +54,8 @@ class AuthProvider extends React.Component {
   logout() {
     this.setState({
       isAuth: false,
-      user: {}
+      user: {},
+      isLoading: false
     });
   }
 
@@ -65,6 +64,7 @@ class AuthProvider extends React.Component {
       <AuthContext.Provider
         value={{
           isAuth: this.state.isAuth,
+          isLoading: this.state.isLoading,
           user: this.state.user,
           id: this.state.id,
           loginContext: this.login,
@@ -77,4 +77,4 @@ class AuthProvider extends React.Component {
   }
 }
 
-export {AuthContext, AuthProvider};
+export { AuthContext, AuthProvider };

@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
-import {Redirect, Route} from "react-router-dom";
-import {AuthContext} from "_helpers/auth_context";
-
+import React, { useContext} from "react";
+import { Redirect, Route } from "react-router-dom";
+import { AuthContext } from "_helpers/auth_context";
+import { withRouter } from "react-router-dom";
 // Component restrict access to component for unauth users
-function PrivateRoute({component: Component, ...rest}) {
+function PrivateRoute({ component: Component, ...rest }) {
   const context = useContext(AuthContext);
 
   return (
@@ -12,11 +12,11 @@ function PrivateRoute({component: Component, ...rest}) {
       render={props =>
         context.isAuth ? (
           <Component {...props} />
-        ) : (
+        ) : context.isLoading ? null : (
           <Redirect
             to={{
               pathname: "/login",
-              state: {from: props.location}
+              state: { from: props.location }
             }}
           />
         )
@@ -25,4 +25,4 @@ function PrivateRoute({component: Component, ...rest}) {
   );
 }
 
-export default PrivateRoute;
+export default withRouter(PrivateRoute);
