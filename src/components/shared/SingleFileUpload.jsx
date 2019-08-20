@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Form, Button, Upload, Icon } from "antd";
+import React, {useState} from "react";
+import {Button, Form, Icon, Upload} from "antd";
 
-function SingleFileUpload({ setFile }) {
+function SingleFileUpload({setFile}) {
   const [fileList, setFileList] = useState([]);
 
   function onRemove() {
@@ -31,7 +31,7 @@ function SingleFileUpload({ setFile }) {
         accept="image/*"
       >
         <Button>
-          <Icon type="upload" /> Select File
+          <Icon type="upload"/> Select File
         </Button>
       </Upload>
     </Form.Item>

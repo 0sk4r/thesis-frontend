@@ -1,5 +1,5 @@
-import { authenticationHelper } from "../_helpers/auth_helpers";
-import {apiWithAuth, api} from "_helpers/api"
+import {authenticationHelper} from "../_helpers/auth_helpers";
+import {api, apiWithAuth} from "_helpers/api"
 
 // Service interact with post api
 export const postService = {
@@ -11,14 +11,14 @@ export const postService = {
 };
 
 // create new post
-function create(title, content,file, category) {
+function create(title, content, file, category) {
   // Create FormData that represents form fields
   let data = new FormData();
   data.append("title", title);
   data.append("content", content);
   data.append("image", file);
-  data.append("category_id", category)
-  
+  data.append("category_id", category);
+
   return apiWithAuth
     .post(
       "/posts/",
@@ -30,21 +30,20 @@ function create(title, content,file, category) {
 }
 
 // Get info to post edit form
-function edit(id){
+function edit(id) {
   return apiWithAuth.get(`/posts/${id}/edit`, {
     headers: authenticationHelper.getHeaders()
   })
 }
 
 // Update post data
-function update(title, content,file, category, postId) {
-  console.log(file)
+function update(title, content, file, category, postId) {
   let data = new FormData();
   data.append("title", title);
   data.append("content", content);
   data.append("image", file);
-  data.append("category_id", category)
-  
+  data.append("category_id", category);
+
   return apiWithAuth
     .put(
       `/posts/${postId}`,
@@ -61,6 +60,6 @@ function getAll(page) {
 }
 
 // Get data for single post
-function get(id){
+function get(id) {
   return api.get(`/posts/${id}`)
 }

@@ -1,4 +1,4 @@
-import { authenticationHelper } from "../_helpers/auth_helpers";
+import {authenticationHelper} from "../_helpers/auth_helpers";
 import {apiWithAuth} from "_helpers/api"
 
 // Service interact with comment api

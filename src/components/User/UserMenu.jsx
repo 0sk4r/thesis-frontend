@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Menu, Avatar } from "antd";
-import { Link } from "react-router-dom";
-import { userService } from "../../_services/user_service";
+import React, {useEffect, useState} from "react";
+import {Avatar, Menu} from "antd";
+import {Link} from "react-router-dom";
+import {userService} from "../../_services/user_service";
 
-const { SubMenu } = Menu;
+const {SubMenu} = Menu;
 
 // Menu component displaying logout link and edit for user info
 function UserMenu(props) {
@@ -21,7 +21,7 @@ function UserMenu(props) {
     <SubMenu
       title={
         <span>
-          <Avatar src={avatar} />
+          <Avatar src={avatar}/>
           <span>{nick}</span>
         </span>
       }

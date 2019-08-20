@@ -1,7 +1,11 @@
 import React from "react";
-import { authenticationService } from "../_services/authentication_service";
-import { authenticationHelper } from "_helpers/auth_helpers";
-const AuthContext = React.createContext();
+import {authenticationService} from "../_services/authentication_service";
+import {authenticationHelper} from "_helpers/auth_helpers";
+
+const AuthContext = React.createContext({
+  isAuth: false,
+  user: {}
+});
 
 // Context providing info about logged user
 class AuthProvider extends React.Component {
@@ -37,7 +41,8 @@ class AuthProvider extends React.Component {
     }
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   // Set login data
   login(user) {
@@ -46,6 +51,7 @@ class AuthProvider extends React.Component {
       user: user
     });
   }
+
   // Remove data form context after logout
   logout() {
     this.setState({
@@ -53,6 +59,7 @@ class AuthProvider extends React.Component {
       user: {}
     });
   }
+
   render() {
     return (
       <AuthContext.Provider
@@ -70,4 +77,4 @@ class AuthProvider extends React.Component {
   }
 }
 
-export { AuthContext, AuthProvider };
+export {AuthContext, AuthProvider};

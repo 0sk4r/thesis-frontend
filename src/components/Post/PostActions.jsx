@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, {useContext, useState} from "react";
 import IconButton from "components/shared/IconButton";
 import LikeButton from "./LikeButton";
 import DislikeButton from "./DislikeButton";
 import EditButton from "components/shared/EditButton";
-import { likeService } from "_services/like_service";
-import { AuthContext } from "_helpers/auth_context";
+import {likeService} from "_services/like_service";
+import {AuthContext} from "_helpers/auth_context";
 import ErrorMessage from "components/shared/ErrorMessage";
 
 // Component displaying additional info about post (likes,dislikes, comment count) and button for like action and edit
@@ -22,8 +22,7 @@ function PostActions(post) {
         .then(response => {
           setLikes(response.data.likes);
           setDislikes(response.data.dislikes);
-        })
-        .catch(error => {});
+        });
     } else {
       // if user is not logged display error message
       ErrorMessage("Please log in to vote");
@@ -31,13 +30,13 @@ function PostActions(post) {
   }
 
   return [
-    <LikeButton likes={likes} handleLike={() => handleLike(post.id, 0)} />,
+    <LikeButton likes={likes} handleLike={() => handleLike(post.id, 0)}/>,
     <DislikeButton
       dislikes={dislikes}
       handleLike={() => handleLike(post.id, 1)}
     />,
-    <IconButton type="message" text={post.comment_count} />,
-    <EditButton post={post} />
+    <IconButton type="message" text={post.comment_count}/>,
+    <EditButton post={post}/>
   ];
 }
 

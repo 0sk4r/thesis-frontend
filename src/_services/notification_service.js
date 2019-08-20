@@ -1,4 +1,4 @@
-import { authenticationHelper } from "../_helpers/auth_helpers";
+import {authenticationHelper} from "../_helpers/auth_helpers";
 import {apiWithAuth} from "_helpers/api"
 
 // Service interact with notification api
@@ -7,12 +7,14 @@ export const notificationService = {
   destroy,
   delete_all
 };
+
 // Get notifications for user
 function index() {
   return apiWithAuth.get("/notifications/", {
     headers: authenticationHelper.getHeaders()
   });
 }
+
 // Destroy notification with id
 function destroy(id) {
   return apiWithAuth.delete(`/notifications/${id}`, {

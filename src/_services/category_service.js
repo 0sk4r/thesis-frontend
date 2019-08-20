@@ -1,4 +1,4 @@
-import { api } from "_helpers/api";
+import {api} from "_helpers/api";
 
 // Set of functions that interact with category api
 export const categoryService = {

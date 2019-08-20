@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router";
-import { Form, Button, Alert } from "antd";
+import React, {useState} from "react";
+import {withRouter} from "react-router";
+import {Alert, Button, Form} from "antd";
 import MentionComponent from "../shared/MentionComponent";
-import { commentService } from "_services/comment_service";
+import {commentService} from "_services/comment_service";
 
 // Form for creating new comments
 function CommentForm(props) {
   // post id of parent post
-  const { post_id } = props;
+  const {post_id} = props;
 
-  const { getFieldDecorator } = props.form;
+  const {getFieldDecorator} = props.form;
 
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -36,11 +36,11 @@ function CommentForm(props) {
 
   return (
     <React.Fragment>
-      <div style={{ textAlign: "center" }}>
+      <div style={{textAlign: "center"}}>
         {/* Display error message from server */}
         {error && (
           <div>
-            <Alert message="Error" description={error} type="error" showIcon />
+            <Alert message="Error" description={error} type="error" showIcon/>
           </div>
         )}
       </div>
@@ -54,7 +54,7 @@ function CommentForm(props) {
                 whitespace: true
               }
             ]
-          })(<MentionComponent onChange={content => setContent(content)} />)}
+          })(<MentionComponent onChange={content => setContent(content)}/>)}
         </Form.Item>
 
         <Form.Item>
@@ -67,6 +67,6 @@ function CommentForm(props) {
   );
 }
 
-const WrappedCommentForm = Form.create({ name: "new" })(CommentForm);
+const WrappedCommentForm = Form.create({name: "new"})(CommentForm);
 const WrappedComentFormWithRouter = withRouter(WrappedCommentForm);
 export default WrappedComentFormWithRouter;

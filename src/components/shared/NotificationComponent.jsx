@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Badge, Dropdown, Icon, Menu, Button } from "antd";
-import { notificationService } from "_services/notification_service";
+import React, {useEffect, useState} from "react";
+import {Badge, Button, Dropdown, Icon, Menu} from "antd";
+import {notificationService} from "_services/notification_service";
 import MentionNotification from "../Notifications/MentionNotification";
 
 // Component displaying dropdown with user notification list
-function NotificationComponent(props) {
+function NotificationComponent() {
   // count of all notification. Dissplaying on badge
   const [count, setCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
@@ -17,7 +17,8 @@ function NotificationComponent(props) {
         setCount(response.data.length);
         setNotifications(response.data);
       })
-      .catch(error => {});
+      .catch(error => {
+      });
   }, []);
 
   // Function handle delete of single notification
@@ -28,8 +29,10 @@ function NotificationComponent(props) {
         setNotifications(response.data);
         setCount(response.data.length);
       })
-      .catch(error => {});
+      .catch(error => {
+      });
   }
+
   // Handle delete of all notification
   function handleDeleteAll() {
     notificationService
@@ -38,7 +41,8 @@ function NotificationComponent(props) {
         setNotifications(response.data);
         setCount(response.data.length);
       })
-      .catch(error => {});
+      .catch(error => {
+      });
   }
 
   const menu = (
@@ -64,7 +68,7 @@ function NotificationComponent(props) {
   return (
     <Dropdown overlay={menu}>
       <Badge count={count}>
-        <Icon type="bell" />
+        <Icon type="bell"/>
       </Badge>
     </Dropdown>
   );

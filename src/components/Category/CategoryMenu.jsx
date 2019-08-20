@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Menu} from "antd";
-import { Link } from "react-router-dom";
-import { categoryService } from "_services/category_service";
+import React, {useEffect, useState} from "react";
+import {Menu} from "antd";
+import {Link} from "react-router-dom";
+import {categoryService} from "_services/category_service";
 
-const { SubMenu } = Menu;
+const {SubMenu} = Menu;
 
 // Menu with link to categories
 function CategoryMenu(props) {

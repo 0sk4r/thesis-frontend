@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { postService } from "_services/post_service";
+import React, {useEffect, useState} from "react";
+import {postService} from "_services/post_service";
 import CategorySelect from "../Category/CategorySelect";
-import { Form, Input, Button, Alert } from "antd";
+import {Alert, Button, Form, Input} from "antd";
 
-const { TextArea } = Input;
+const {TextArea} = Input;
 
 function PostEditForm(props) {
-  const { match } = props;
+  const {match} = props;
   const [postId, setPostId] = useState(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -17,12 +17,12 @@ function PostEditForm(props) {
 
   const formItemLayout = {
     labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 }
+      xs: {span: 24},
+      sm: {span: 8}
     },
     wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 8 }
+      xs: {span: 24},
+      sm: {span: 8}
     }
   };
 
@@ -74,7 +74,7 @@ function PostEditForm(props) {
 
     postService
       .update(title, content, file, categoryId, postId)
-      .then(response => {
+      .then(() => {
         setIsLoading(false);
         props.history.push(`/posts/${postId}`);
       })
@@ -85,13 +85,13 @@ function PostEditForm(props) {
       });
   }
 
-  const { getFieldDecorator } = props.form;
+  const {getFieldDecorator} = props.form;
 
   return (
     <React.Fragment>
       {error ? (
         <React.Fragment>
-          <div style={{ textAlign: "center" }}>
+          <div style={{textAlign: "center"}}>
             <div>
               <Alert
                 message="Error"
@@ -116,7 +116,7 @@ function PostEditForm(props) {
                   }
                 ]
               })(
-                <Input name="title" onChange={e => setTitle(e.target.value)} />
+                <Input name="title" onChange={e => setTitle(e.target.value)}/>
               )}
             </Form.Item>
 
@@ -140,7 +140,7 @@ function PostEditForm(props) {
             </Form.Item>
 
             <Form.Item label="Image:">
-              <Input type="file" onChange={handleFileChange} />
+              <Input type="file" onChange={handleFileChange}/>
             </Form.Item>
 
             <Form.Item label="Category:">
@@ -162,5 +162,5 @@ function PostEditForm(props) {
   );
 }
 
-const WrappedPostEditForm = Form.create({ name: "new" })(PostEditForm);
+const WrappedPostEditForm = Form.create({name: "new"})(PostEditForm);
 export default WrappedPostEditForm;

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { postService } from "_services/post_service";
+import React, {useState} from "react";
+import {postService} from "_services/post_service";
 import CategorySelect from "../Category/CategorySelect";
 import SingleFileUpload from "components/shared/SingleFileUpload";
-import { Form, Input, Button, Alert } from "antd";
+import {Alert, Button, Form, Input} from "antd";
 
-const { TextArea } = Input;
+const {TextArea} = Input;
 
 function PostForm(props) {
   const [title, setTitle] = useState("");
@@ -15,12 +15,12 @@ function PostForm(props) {
   const [categoryId, setCategoryId] = useState(1);
   const formItemLayout = {
     labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 }
+      xs: {span: 24},
+      sm: {span: 8}
     },
     wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 8 }
+      xs: {span: 24},
+      sm: {span: 8}
     }
   };
 
@@ -54,15 +54,15 @@ function PostForm(props) {
       });
   }
 
-  const { getFieldDecorator } = props.form;
+  const {getFieldDecorator} = props.form;
 
   return (
     <React.Fragment>
-      <div style={{ textAlign: "center" }}>
+      <div style={{textAlign: "center"}}>
         <h1>New post</h1>
         {error && (
           <div>
-            <Alert message="Error" description={error} type="error" showIcon />
+            <Alert message="Error" description={error} type="error" showIcon/>
           </div>
         )}
       </div>
@@ -76,7 +76,7 @@ function PostForm(props) {
                 whitespace: true
               }
             ]
-          })(<Input name="title" onChange={e => setTitle(e.target.value)} />)}
+          })(<Input name="title" onChange={e => setTitle(e.target.value)}/>)}
         </Form.Item>
 
         <Form.Item label="Content:">
@@ -99,7 +99,7 @@ function PostForm(props) {
         </Form.Item>
 
         <Form.Item label="Image:">
-          <SingleFileUpload setFile={setFile} />
+          <SingleFileUpload setFile={setFile}/>
         </Form.Item>
 
         <Form.Item label="Category:">
@@ -118,5 +118,5 @@ function PostForm(props) {
   );
 }
 
-const WrappedPostForm = Form.create({ name: "new" })(PostForm);
+const WrappedPostForm = Form.create({name: "new"})(PostForm);
 export default WrappedPostForm;

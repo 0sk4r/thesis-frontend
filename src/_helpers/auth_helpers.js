@@ -6,7 +6,7 @@ export const authenticationHelper = {
 
 // Return set of headers needed for authentication
 function getHeaders() {
-  const user =  JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   return {
     "token-type": "Bearer",
     "uid": user.uid,

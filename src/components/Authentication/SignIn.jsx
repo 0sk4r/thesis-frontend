@@ -1,9 +1,9 @@
 import React from "react";
 
-import { authenticationService } from "_services/authentication_service";
-import { AuthContext } from "_helpers/auth_context";
+import {authenticationService} from "_services/authentication_service";
+import {AuthContext} from "_helpers/auth_context";
 
-import { Form, Input, Button, Alert } from "antd";
+import {Alert, Button, Form, Input} from "antd";
 import SingleFileUpload from "components/shared/SingleFileUpload";
 
 // Component handling SignIn action
@@ -12,7 +12,8 @@ class SignIn extends React.Component {
     super(props);
 
     // When user is logged redirect to root
-    if (authenticationService.currentUserValue) {
+    if (AuthContext.isAuth) {
+      console.log("test")
       this.props.history.push("/");
     }
 
@@ -34,13 +35,13 @@ class SignIn extends React.Component {
 
   // Handle form input change
   handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    const {name, value} = e.target;
+    this.setState({[name]: value});
   }
 
   // Handle change of avatar
   handleFileChange(e) {
-    this.setState({ file: e.target.files[0] });
+    this.setState({file: e.target.files[0]});
     return false;
   }
 
@@ -48,7 +49,7 @@ class SignIn extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    this.setState({ isLoading: true });
+    this.setState({isLoading: true});
 
     const {
       email,
@@ -61,8 +62,8 @@ class SignIn extends React.Component {
 
     authenticationService
       .signin(email, nick, name, password, password_confirmation, file)
-      .then(response => {
-        this.setState({ isLoading: false });
+      .then(() => {
+        this.setState({isLoading: false});
         this.props.history.push("/");
       })
       .catch(error => {
@@ -73,9 +74,9 @@ class SignIn extends React.Component {
           } else {
             error_messages = error.response.data.errors.full_messages;
           }
-          this.setState({ isLoading: false, errors: error_messages });
+          this.setState({isLoading: false, errors: error_messages});
         } else if (error.request) {
-          this.setState({ isLoading: false, errors: "Backend not responding" });
+          this.setState({isLoading: false, errors: "Backend not responding"});
         }
       });
   }
@@ -87,18 +88,18 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const {errors} = this.state;
 
-    const { getFieldDecorator } = this.props.form;
+    const {getFieldDecorator} = this.props.form;
 
     const formItemLayout = {
       labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 }
+        xs: {span: 24},
+        sm: {span: 8}
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 8 }
+        xs: {span: 24},
+        sm: {span: 8}
       }
     };
 
@@ -117,7 +118,7 @@ class SignIn extends React.Component {
 
     return (
       <React.Fragment>
-        <div style={{ textAlign: "center" }}>
+        <div style={{textAlign: "center"}}>
           <h1>Sign in</h1>
           {errors && (
             <div>
@@ -161,7 +162,7 @@ class SignIn extends React.Component {
                   whitespace: true
                 }
               ]
-            })(<Input name="name" onChange={this.handleChange} />)}
+            })(<Input name="name" onChange={this.handleChange}/>)}
           </Form.Item>
 
           <Form.Item label="Nick:">
@@ -219,7 +220,7 @@ class SignIn extends React.Component {
           </Form.Item>
 
           <Form.Item label="Avatar:">
-            <SingleFileUpload setFile={file => this.setState({file: file})} />
+            <SingleFileUpload setFile={file => this.setState({file: file})}/>
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
@@ -239,5 +240,5 @@ class SignIn extends React.Component {
 
 SignIn.contextType = AuthContext;
 
-const WrappedSignIn = Form.create({ name: "register" })(SignIn);
+const WrappedSignIn = Form.create({name: "register"})(SignIn);
 export default WrappedSignIn;

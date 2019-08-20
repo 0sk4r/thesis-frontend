@@ -1,8 +1,8 @@
 import React from "react";
-import { Menu,  Icon } from "antd";
-import { Link } from "react-router-dom";
+import {Icon, Menu} from "antd";
+import {Link} from "react-router-dom";
 
-const { SubMenu } = Menu;
+const {SubMenu} = Menu;
 
 // Menu component with authentication action for not logged in user
 function LoginMenu(props) {
@@ -11,7 +11,7 @@ function LoginMenu(props) {
     <SubMenu
       title={
         <span>
-          <Icon type="user" />
+          <Icon type="user"/>
         </span>
       }
       style={props.style}

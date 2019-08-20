@@ -1,3 +1,5 @@
+import {authenticationHelper} from "../_helpers/auth_helpers";
+
 const axios = require("axios");
 
 // Authentication actions
@@ -16,7 +18,7 @@ function login(email, password) {
       email: email,
       password: password
     })
-    .then(function(response) {
+    .then(function (response) {
       // return in response headers access_token, client, expiry, uid needed for authenticate requests
       const headers = response.headers;
 
@@ -90,18 +92,6 @@ function validate() {
           "token-type": "Bearer"
         }
       })
-      .then(response => handleTokenChange(response));
-  }
-
-  // Function handle token change after request
-  function handleTokenChange(response) {
-    const access_token = response.headers["access-token"];
-    const expiry = response.headers["expiry"];
-    if (access_token) {
-      let user = JSON.parse(localStorage.getItem("user"));
-      user.access_token = access_token;
-      user.expiry = expiry;
-      localStorage.setItem("user", JSON.stringify(user));
-    }
+      .then(response => authenticationHelper.handleTokenChange(response));
   }
 }

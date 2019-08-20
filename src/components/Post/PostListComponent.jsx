@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Pagination } from "antd";
-import { postService } from "_services/post_service";
+import React, {useEffect, useState} from "react";
+import {Pagination} from "antd";
+import {postService} from "_services/post_service";
 import PostListContainer from "./PostListContainer";
 
 // Component responsible for present list of all posts
@@ -46,8 +46,8 @@ function PostListComponent() {
 
   return (
     <React.Fragment>
-      <PostListContainer posts={posts} isLoading={isLoading} errors={errors} />
-      <Pagination total={totalItems} pageSize={perPage} onChange={onChange} />
+      <PostListContainer posts={posts} isLoading={isLoading} errors={errors}/>
+      <Pagination total={totalItems} pageSize={perPage} onChange={onChange}/>
     </React.Fragment>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
-import { AuthContext } from "_helpers/auth_context";
-import { authenticationService } from "_services/authentication_service";
-import { Spin, Alert } from "antd";
+import {AuthContext} from "_helpers/auth_context";
+import {authenticationService} from "_services/authentication_service";
+import {Alert, Spin} from "antd";
 
 // Componet responsible for logout
 class LogOut extends React.Component {
@@ -17,12 +17,12 @@ class LogOut extends React.Component {
   }
 
   logout() {
-    this.setState({ isLoading: true });
+    this.setState({isLoading: true});
 
     authenticationService
       .logout()
       .then(response => {
-        this.setState({ isLoading: false });
+        this.setState({isLoading: false});
         // Logout user in cotext
         this.context.logoutContext();
         // Redirect logout user to root
@@ -31,19 +31,20 @@ class LogOut extends React.Component {
         localStorage.removeItem("user");
       })
       .catch(error => {
-        this.setState({ isLoading: false, error: error.response.data.errors });
+        this.setState({isLoading: false, error: error.response.data.errors});
       });
   }
 
   componentDidMount() {
     this.logout();
   }
+
   render() {
-    const { isLoading, error } = this.state;
+    const {isLoading, error} = this.state;
 
     if (error) {
       return (
-        <Alert message="Error" description={error} type="error" showIcon />
+        <Alert message="Error" description={error} type="error" showIcon/>
       );
     }
 
@@ -51,7 +52,7 @@ class LogOut extends React.Component {
       return (
         <div>
           <h1>Log out</h1>
-          <Spin size="large" />
+          <Spin size="large"/>
         </div>
       );
     }
@@ -59,11 +60,12 @@ class LogOut extends React.Component {
     return (
       <div>
         <h1>Log out</h1>
-        <Spin size="large" />
+        <Spin size="large"/>
       </div>
     );
   }
 }
+
 LogOut.contextType = AuthContext;
 
 export default LogOut;

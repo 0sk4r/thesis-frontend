@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { postService } from "_services/post_service";
-import { List, Alert } from "antd";
+import React, {useEffect, useState} from "react";
+import {postService} from "_services/post_service";
+import {Alert, List} from "antd";
 import CommentComponent from "../Comment/CommentComponent";
 import PostContainer from "./PostContainer";
 
 // Component responsible for displaying post and comments
 function PostShow(props) {
-  const { match } = props;
+  const {match} = props;
   const [post, setPost] = useState({});
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,22 +45,22 @@ function PostShow(props) {
         <h1>Loading...</h1>
       </div>
     );
-  
+
   // Display error message
   if (errors)
     return (
       <div>
-        <Alert message="Error" description={errors} type="error" showIcon />
+        <Alert message="Error" description={errors} type="error" showIcon/>
       </div>
     );
 
   return (
     <React.Fragment>
       <List itemLayout="vertical" size="large" loading={isLoading}>
-        <PostContainer post={post} />
+        <PostContainer post={post}/>
       </List>
       {/* Pass comment data */}
-      <CommentComponent post_id={post.id} comments={comments} />
+      <CommentComponent post_id={post.id} comments={comments}/>
     </React.Fragment>
   );
 }

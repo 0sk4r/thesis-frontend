@@ -1,7 +1,8 @@
 import React from 'react'
-import {Menu, Row, Col, Button} from "antd";
+import {Button, Col, Menu, Row} from "antd";
 import {Link} from "react-router-dom";
 import moment from "moment"
+
 // Component displaying mention notification
 function MentionNotification(props) {
   // COMMENT_LENGTH decide how long comment quote will be in notification
@@ -25,7 +26,8 @@ function MentionNotification(props) {
         </Col>
 
         <Col span={4}>
-          <Button type="danger" shape="circle" icon="delete" onClick={() => props.handleDeleteNotification(notification.id)} />
+          <Button type="danger" shape="circle" icon="delete"
+                  onClick={() => props.handleDeleteNotification(notification.id)}/>
         </Col>
       </Row>
       <Row>

@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Form, Select } from "antd";
-import { categoryService } from "_services/category_service";
+import React, {useEffect, useState} from "react";
+import {Form, Select} from "antd";
+import {categoryService} from "_services/category_service";
 
-const { Option } = Select;
+const {Option} = Select;
 
 // Category list component. Display menu of all categories to select
 function CategorySelect(props) {
   const [categories, setCategories] = useState([]);
-  const { getFieldDecorator } = props.form;
+  const {getFieldDecorator} = props.form;
 
   // Fetch data
   useEffect(() => {
@@ -24,7 +24,7 @@ function CategorySelect(props) {
         <Select
           showSearch
           name="category"
-          style={{ width: 200 }}
+          style={{width: 200}}
           placeholder="Select a category"
           optionFilterProp="children"
           onChange={e => props.handleCategoryChange(e)}
@@ -43,5 +43,5 @@ function CategorySelect(props) {
   );
 }
 
-const WrappedCategorySelect = Form.create({ name: "new" })(CategorySelect);
+const WrappedCategorySelect = Form.create({name: "new"})(CategorySelect);
 export default WrappedCategorySelect;

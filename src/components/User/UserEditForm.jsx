@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Input, Form, Button, Alert, Avatar, Row, Col } from "antd";
-import { userService } from "../../_services/user_service";
+import React, {useEffect, useState} from "react";
+import {Alert, Avatar, Button, Col, Form, Input, Row} from "antd";
+import {userService} from "../../_services/user_service";
 import SingleFileUpload from "components/shared/SingleFileUpload";
 
 function UserEditForm(props) {
-  const { getFieldDecorator } = props.form;
+  const {getFieldDecorator} = props.form;
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState(null);
-  const [oldAvatar, setOldAvatar] = useState("")
+  const [oldAvatar, setOldAvatar] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState("");
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
 
   const formItemLayout = {
     labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 }
+      xs: {span: 24},
+      sm: {span: 8}
     },
     wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 8 }
+      xs: {span: 24},
+      sm: {span: 8}
     }
   };
 
@@ -58,7 +58,7 @@ function UserEditForm(props) {
     e.preventDefault();
     setIsLoading(true);
     setErrors("");
-    setMessage("")
+    setMessage("");
     userService
       .update(name, nickname, avatar)
       .then(response => {
@@ -66,23 +66,23 @@ function UserEditForm(props) {
         setMessage(response.data.message);
       })
       .catch(error => {
-        setErrors(error.response.data.errors)
+        setErrors(error.response.data.errors);
         setIsLoading(false);
       });
   }
 
   return (
     <React.Fragment>
-      <div style={{ textAlign: "center" }}>
+      <div style={{textAlign: "center"}}>
         <h1>Edit user info</h1>
         {errors && (
           <div>
-            <Alert message="Error" description={errors} type="error" showIcon />
+            <Alert message="Error" description={errors} type="error" showIcon/>
           </div>
         )}
         {message && (
           <div>
-            <Alert message="Success" description={message} type="success" showIcon />
+            <Alert message="Success" description={message} type="success" showIcon/>
           </div>
         )}
       </div>
@@ -97,7 +97,7 @@ function UserEditForm(props) {
                 whitespace: true
               }
             ]
-          })(<Input name="name" onChange={e => setName(e.target.value)} />)}
+          })(<Input name="name" onChange={e => setName(e.target.value)}/>)}
         </Form.Item>
 
         <Form.Item label="Nick:">
@@ -113,7 +113,9 @@ function UserEditForm(props) {
           })(
             <Input
               name="nick"
-              onChange={e => {setNickname(e.target.value)}}
+              onChange={e => {
+                setNickname(e.target.value)
+              }}
               autoComplete="username"
             />
           )}
@@ -122,10 +124,10 @@ function UserEditForm(props) {
         <Form.Item label="Avatar:">
           <Row>
             <Col span={20}>
-            <SingleFileUpload setFile={setAvatar}/>
+              <SingleFileUpload setFile={setAvatar}/>
             </Col>
             <Col span={4}>
-            <Avatar src={oldAvatar} size={64}  />
+              <Avatar src={oldAvatar} size={64}/>
             </Col>
           </Row>
         </Form.Item>
@@ -140,5 +142,5 @@ function UserEditForm(props) {
   );
 }
 
-const WrappedUserEditForm = Form.create({ name: "new" })(UserEditForm);
+const WrappedUserEditForm = Form.create({name: "new"})(UserEditForm);
 export default WrappedUserEditForm;

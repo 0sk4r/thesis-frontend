@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { categoryService } from "_services/category_service";
+import React, {useEffect, useState} from "react";
+import {categoryService} from "_services/category_service";
 import PostListContainer from "components/Post/PostListContainer";
 
 // Display all post from selected category.
 function CategoryShow(props) {
-  const { match } = props;
+  const {match} = props;
   const [posts, setPosts] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +39,7 @@ function CategoryShow(props) {
   return (
     <React.Fragment>
       <h1>{"Post from category " + categoryName}</h1>
-      <PostListContainer posts={posts} isLoading={isLoading} errors={errors} />
+      <PostListContainer posts={posts} isLoading={isLoading} errors={errors}/>
     </React.Fragment>
   );
 }
