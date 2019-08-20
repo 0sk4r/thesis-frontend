@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Input, Form, Button, Alert, Avatar, Row, Col } from "antd";
 import { userService } from "../../_services/user_service";
-import { authenticationHelper } from "../../_helpers/auth_helpers";
 import SingleFileUpload from "components/shared/SingleFileUpload";
 
 function UserEditForm(props) {
@@ -43,14 +42,12 @@ function UserEditForm(props) {
     userService
       .edit()
       .then(response => {
-        authenticationHelper.handleTokenChange(response);
         const user = response.data;
         setName(user.name);
         setNickname(user.nickname);
         setOldAvatar(user.image.url);
       })
       .catch(error => {
-        authenticationHelper.handleTokenChange(error.response);
         setIsLoading(false);
         const errors_messages = error.response.data.errors;
         setErrors(errors_messages);
@@ -65,13 +62,10 @@ function UserEditForm(props) {
     userService
       .update(name, nickname, avatar)
       .then(response => {
-        authenticationHelper.handleTokenChange(response);
         setIsLoading(false);
         setMessage(response.data.message);
-        // this.props.history.push("/");
       })
       .catch(error => {
-        authenticationHelper.handleTokenChange(error.response);
         setErrors(error.response.data.errors)
         setIsLoading(false);
       });

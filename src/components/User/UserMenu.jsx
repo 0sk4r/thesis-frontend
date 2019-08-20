@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Menu,  Avatar } from "antd";
+import { Menu, Avatar } from "antd";
 import { Link } from "react-router-dom";
 import { userService } from "../../_services/user_service";
 

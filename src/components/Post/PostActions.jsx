@@ -4,7 +4,6 @@ import LikeButton from "./LikeButton";
 import DislikeButton from "./DislikeButton";
 import EditButton from "components/shared/EditButton";
 import { likeService } from "_services/like_service";
-import { authenticationHelper } from "_helpers/auth_helpers";
 import { AuthContext } from "_helpers/auth_context";
 import ErrorMessage from "components/shared/ErrorMessage";
 
@@ -21,13 +20,10 @@ function PostActions(post) {
       likeService
         .create(post_id, type)
         .then(response => {
-          authenticationHelper.handleTokenChange(response);
           setLikes(response.data.likes);
           setDislikes(response.data.dislikes);
         })
-        .catch(error => {
-          authenticationHelper.handleTokenChange(error.response);
-        });
+        .catch(error => {});
     } else {
       // if user is not logged display error message
       ErrorMessage("Please log in to vote");

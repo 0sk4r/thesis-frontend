@@ -1,4 +1,4 @@
-const axios = require("axios");
+import { api } from "_helpers/api";
 
 // Set of functions that interact with category api
 export const categoryService = {
@@ -8,10 +8,10 @@ export const categoryService = {
 
 // Get all category
 function index() {
-  return axios.get("/api/categories/");
+  return api.get("/categories/");
 }
 
 // Get info and post from selected category
 function show(id) {
-  return axios.get(`/api/categories/${id}`);
+  return api.get(`/categories/${id}`);
 }

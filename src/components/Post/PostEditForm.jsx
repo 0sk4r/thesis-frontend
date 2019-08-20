@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { postService } from "_services/post_service";
-import { authenticationHelper } from "_helpers/auth_helpers";
-
 import CategorySelect from "../Category/CategorySelect";
 import { Form, Input, Button, Alert } from "antd";
+
 const { TextArea } = Input;
 
 function PostEditForm(props) {
@@ -44,8 +43,6 @@ function PostEditForm(props) {
     postService
       .edit(match.params.id)
       .then(response => {
-        console.log(response.data);
-        authenticationHelper.handleTokenChange(response);
         const post = response.data;
 
         setPostId(post.id);
@@ -54,9 +51,6 @@ function PostEditForm(props) {
         setCategoryId(post.category.id);
       })
       .catch(error => {
-        console.log(error.response);
-        authenticationHelper.handleTokenChange(error.response);
-
         const response = error.response;
 
         if (response.status === 404) {
@@ -81,12 +75,10 @@ function PostEditForm(props) {
     postService
       .update(title, content, file, categoryId, postId)
       .then(response => {
-        authenticationHelper.handleTokenChange(response);
         setIsLoading(false);
         props.history.push(`/posts/${postId}`);
       })
       .catch(error => {
-        authenticationHelper.handleTokenChange(error.response);
         setIsLoading(false);
         const errors_messages = error.response.data.errors;
         setError(errors_messages);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Dropdown, Icon, Menu, Button } from "antd";
 import { notificationService } from "_services/notification_service";
-import { authenticationHelper } from "_helpers/auth_helpers";
 import MentionNotification from "../Notifications/MentionNotification";
 
 // Component displaying dropdown with user notification list
@@ -15,13 +14,10 @@ function NotificationComponent(props) {
     notificationService
       .index()
       .then(response => {
-        authenticationHelper.handleTokenChange(response);
         setCount(response.data.length);
         setNotifications(response.data);
       })
-      .catch(error => {
-        authenticationHelper.handleTokenChange(error.response);
-      });
+      .catch(error => {});
   }, []);
 
   // Function handle delete of single notification
@@ -29,26 +25,20 @@ function NotificationComponent(props) {
     notificationService
       .destroy(id)
       .then(response => {
-        authenticationHelper.handleTokenChange(response);
         setNotifications(response.data);
         setCount(response.data.length);
       })
-      .catch(error => {
-        authenticationHelper.handleTokenChange(error.response);
-      });
+      .catch(error => {});
   }
   // Handle delete of all notification
   function handleDeleteAll() {
     notificationService
       .delete_all()
       .then(response => {
-        authenticationHelper.handleTokenChange(response);
         setNotifications(response.data);
         setCount(response.data.length);
       })
-      .catch(error => {
-        authenticationHelper.handleTokenChange(error.response);
-      });
+      .catch(error => {});
   }
 
   const menu = (
@@ -60,7 +50,12 @@ function NotificationComponent(props) {
         />
       ))}
       <Menu.Item key="dlkajslkjdlka">
-        <Button type="danger" shape="round" icon="delete" onClick={() => handleDeleteAll()}>
+        <Button
+          type="danger"
+          shape="round"
+          icon="delete"
+          onClick={() => handleDeleteAll()}
+        >
           Delete all!
         </Button>
       </Menu.Item>

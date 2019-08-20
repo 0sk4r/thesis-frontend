@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router";
 import { Form, Button, Alert } from "antd";
 import MentionComponent from "../shared/MentionComponent";
-import { authenticationHelper } from "../../_helpers/auth_helpers";
-import { commentService } from "../../_services/comment_service";
+import { commentService } from "_services/comment_service";
 
 // Form for creating new comments
 function CommentForm(props) {
@@ -24,16 +23,11 @@ function CommentForm(props) {
 
     commentService
       .create(post_id, content)
-      .then(response => {
-        console.log(response);
-        authenticationHelper.handleTokenChange(response);
+      .then(() => {
         setIsLoading(false);
         props.history.go(0);
       })
       .catch(error => {
-        console.log(error);
-        console.log(error.response);
-        authenticationHelper.handleTokenChange(error.response);
         setIsLoading(false);
         const errors_messages = error.response.data.errors;
         setError(errors_messages);

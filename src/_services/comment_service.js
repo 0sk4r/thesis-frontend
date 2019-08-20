@@ -1,5 +1,5 @@
 import { authenticationHelper } from "../_helpers/auth_helpers";
-const axios = require("axios");
+import {apiWithAuth} from "_helpers/api"
 
 // Service interact with comment api
 export const commentService = {
@@ -12,9 +12,9 @@ function create(post_id, content) {
   data.append("post_id", post_id);
   data.append("content", content);
 
-  return axios
+  return apiWithAuth
     .post(
-      "/api/comments/",
+      "/comments/",
       data,
       {
         // Add authentication headers to request

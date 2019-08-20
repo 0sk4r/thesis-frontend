@@ -1,6 +1,5 @@
 import { authenticationHelper } from "../_helpers/auth_helpers";
-
-const axios = require("axios");
+import { apiWithAuth, api } from "_helpers/api";
 
 // Service interact with user api
 
@@ -13,12 +12,12 @@ export const userService = {
 
 // Find users that nickname fit to key
 function find(key) {
-  return axios.get("/api/users/find/", { params: { key: key } });
+  return api.get("/users/find/", { params: { key: key } });
 }
 
 // Get info for user edit form
 function edit() {
-  return axios.get("/api/users/edit/", {
+  return apiWithAuth.get("/users/edit/", {
     headers: authenticationHelper.getHeaders()
   });
 }
@@ -29,13 +28,13 @@ function update(name, nickname, image) {
   data.append("name", name);
   data.append("image", image);
 
-  return axios.patch("/api/users/edit", data, {
+  return apiWithAuth.patch("/users/edit", data, {
     headers: authenticationHelper.getHeaders()
   });
 }
 // get info about logged user
 function getInfo() {
-  return axios.get("/api/users/getInfo", {
+  return apiWithAuth.get("/users/getInfo", {
     headers: authenticationHelper.getHeaders()
   });
 }

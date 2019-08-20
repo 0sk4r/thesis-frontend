@@ -1,5 +1,5 @@
 import { authenticationHelper } from "../_helpers/auth_helpers";
-const axios = require("axios");
+import {apiWithAuth, api} from "_helpers/api"
 
 // Service interact with post api
 export const postService = {
@@ -19,9 +19,9 @@ function create(title, content,file, category) {
   data.append("image", file);
   data.append("category_id", category)
   
-  return axios
+  return apiWithAuth
     .post(
-      "/api/posts/",
+      "/posts/",
       data,
       {
         headers: authenticationHelper.getHeaders()
@@ -31,7 +31,7 @@ function create(title, content,file, category) {
 
 // Get info to post edit form
 function edit(id){
-  return axios.get(`/api/posts/${id}/edit`, {
+  return apiWithAuth.get(`/posts/${id}/edit`, {
     headers: authenticationHelper.getHeaders()
   })
 }
@@ -45,9 +45,9 @@ function update(title, content,file, category, postId) {
   data.append("image", file);
   data.append("category_id", category)
   
-  return axios
+  return apiWithAuth
     .put(
-      `/api/posts/${postId}`,
+      `/posts/${postId}`,
       data,
       {
         headers: authenticationHelper.getHeaders()
@@ -57,10 +57,10 @@ function update(title, content,file, category, postId) {
 
 // Get all posts with pagination. Page params decide which page get
 function getAll(page) {
-  return axios.get(`/api/posts/page/${page}`)
+  return api.get(`/posts/page/${page}`)
 }
 
 // Get data for single post
 function get(id){
-  return axios.get(`/api/posts/${id}`)
+  return api.get(`/posts/${id}`)
 }

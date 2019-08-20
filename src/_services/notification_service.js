@@ -1,5 +1,5 @@
 import { authenticationHelper } from "../_helpers/auth_helpers";
-const axios = require("axios");
+import {apiWithAuth} from "_helpers/api"
 
 // Service interact with notification api
 export const notificationService = {
@@ -9,20 +9,20 @@ export const notificationService = {
 };
 // Get notifications for user
 function index() {
-  return axios.get("/api/notifications/", {
+  return apiWithAuth.get("/notifications/", {
     headers: authenticationHelper.getHeaders()
   });
 }
 // Destroy notification with id
 function destroy(id) {
-  return axios.delete(`/api/notifications/${id}`, {
+  return apiWithAuth.delete(`/notifications/${id}`, {
     headers: authenticationHelper.getHeaders()
   });
 }
 
 // Destroy all user notification
 function delete_all() {
-  return axios.delete(`/api/notifications/delete_all`, {
+  return apiWithAuth.delete(`/notifications/delete_all`, {
     headers: authenticationHelper.getHeaders()
   });
 }

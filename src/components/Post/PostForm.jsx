@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { postService } from "_services/post_service";
-import { authenticationHelper } from "_helpers/auth_helpers";
 import CategorySelect from "../Category/CategorySelect";
 import SingleFileUpload from "components/shared/SingleFileUpload";
 import { Form, Input, Button, Alert } from "antd";
+
 const { TextArea } = Input;
 
 function PostForm(props) {
@@ -44,12 +44,10 @@ function PostForm(props) {
     postService
       .create(title, content, file, categoryId)
       .then(response => {
-        authenticationHelper.handleTokenChange(response);
         setIsLoading(false);
         props.history.push(`/posts/${response.data.post.id}`);
       })
       .catch(error => {
-        authenticationHelper.handleTokenChange(error.response);
         setIsLoading(false);
         const errors_messages = error.response.data.errors;
         setError(errors_messages);
