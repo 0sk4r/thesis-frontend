@@ -1,7 +1,7 @@
 import React from 'react'
 import {Menu, Row, Col, Button} from "antd";
 import {Link} from "react-router-dom";
-
+import moment from "moment"
 // Component displaying mention notification
 function MentionNotification(props) {
   // COMMENT_LENGTH decide how long comment quote will be in notification
@@ -31,7 +31,7 @@ function MentionNotification(props) {
       <Row>
         <Col span={24}>
           <small>
-            {notification.created_at}
+            {moment(notification.created_at).fromNow()}
           </small>
         </Col>
       </Row>

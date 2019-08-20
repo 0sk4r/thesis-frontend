@@ -3,6 +3,7 @@ import { List, Avatar} from "antd";
 import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import PostActions from "./PostActions";
+import moment from "moment";
 
 // Component responsible for displaying single post
 function PostContainer(props) {
@@ -27,7 +28,7 @@ function PostContainer(props) {
             <p>{post.title} / {post.category.name}</p>
           </Link>
         }
-        description={<p>by {post.user.name}</p>}
+        description={<p>by {post.user.name} {moment(post.created_at).fromNow()}</p>}
       />
       {/* Render markdown */}
       <ReactMarkdown source={content}/>

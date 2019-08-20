@@ -1,5 +1,6 @@
 import React from "react";
 import { Comment } from 'antd';
+import moment from "moment";
 
 // Componetn display single comment. Receive data in props
 function CommentShow(props){
@@ -10,7 +11,7 @@ return(
           author={comment.user.name}
           avatar={comment.user.image.url}
           content={comment.content}
-          datetime={comment.created_at}
+          datetime={moment(comment.created_at).fromNow()}
         />
 )
 }
