@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
-import IconButton from "components/shared/IconButton";
+import IconButton from "./IconButton";
 import {AuthContext} from "_helpers/auth_context";
 
 // Button that redirect to post edit page

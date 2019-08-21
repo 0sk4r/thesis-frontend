@@ -1,5 +1,5 @@
 import React from "react";
-import IconButton from "components/shared/IconButton";
+import IconButton from "./IconButton";
 
 function LikeButton(props) {
   return (

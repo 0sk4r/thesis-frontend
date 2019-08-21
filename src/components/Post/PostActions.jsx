@@ -1,8 +1,8 @@
 import React, {useContext, useState} from "react";
-import IconButton from "components/shared/IconButton";
-import LikeButton from "./LikeButton";
-import DislikeButton from "./DislikeButton";
-import EditButton from "components/shared/EditButton";
+import IconButton from "../shared/Buttons/IconButton";
+import LikeButton from "../shared/Buttons/LikeButton";
+import DislikeButton from "../shared/Buttons/DislikeButton";
+import EditButton from "components/shared/Buttons/EditButton";
 import {likeService} from "_services/like_service";
 import {AuthContext} from "_helpers/auth_context";
 import ErrorMessage from "components/shared/ErrorMessage";

@@ -1,12 +1,12 @@
 import React, {useContext} from "react";
 import {Link} from "react-router-dom";
-import Logo from "../../images/logo.png";
+import Logo from "../../../images/logo.png";
 import {Layout, Menu} from "antd";
-import {AuthContext} from "../../_helpers/auth_context";
-import NotificationComponent from "./NotificationComponent"
-import UserMenu from "../User/UserMenu"
+import {AuthContext} from "../../../_helpers/auth_context";
+import NotificationComponent from "../../Notifications/NotificationComponent"
+import UserMenu from "../../User/UserMenu"
 import LoginMenu from "./LoginMenu";
-import CategoryMenu from "../Category/CategoryMenu";
+import CategoryMenu from "../../Category/CategoryMenu";
 
 const {Header} = Layout;
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Button, Dropdown, Icon, Menu } from "antd";
 import { notificationService } from "_services/notification_service";
-import MentionNotification from "../Notifications/MentionNotification";
+import MentionNotification from "./MentionNotification";
 
 // Component displaying dropdown with user notification list
 function NotificationComponent() {
@@ -22,8 +22,8 @@ function NotificationComponent() {
   useEffect(() => {
     fetchNotifications();
 
+    // fetch data every 10s
     const interval = setInterval(() => {
-      console.log("test");
       fetchNotifications();
     }, 10000);
 

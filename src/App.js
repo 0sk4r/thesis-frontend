@@ -4,7 +4,7 @@ import PrivateRoute from "./components/shared/PrivateRoute";
 import SignIn from "./components/Authentication/SignIn";
 import LogIn from "./components/Authentication/LogIn";
 import LogOut from "./components/Authentication/LogOut";
-import Header from "./components/shared/Header";
+import Header from "./components/shared/Layout/Header";
 import PostForm from "./components/Post/PostForm";
 import PostListComponent from "./components/Post/PostListComponent";
 import PostShow from "./components/Post/PostShow";
