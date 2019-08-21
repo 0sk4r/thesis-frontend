@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {Badge, Button, Dropdown, Icon, Menu} from "antd";
-import {notificationService} from "_services/notification_service";
+import React, { useEffect, useState } from "react";
+import { Badge, Button, Dropdown, Icon, Menu } from "antd";
+import { notificationService } from "_services/notification_service";
 import MentionNotification from "../Notifications/MentionNotification";
 
 // Component displaying dropdown with user notification list
@@ -9,16 +9,25 @@ function NotificationComponent() {
   const [count, setCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
 
-  // fetch data
-  useEffect(() => {
+  function fetchNotifications() {
     notificationService
       .index()
       .then(response => {
         setCount(response.data.length);
         setNotifications(response.data);
       })
-      .catch(error => {
-      });
+      .catch(error => {});
+  }
+  // fetch data
+  useEffect(() => {
+    fetchNotifications();
+
+    const interval = setInterval(() => {
+      console.log("test");
+      fetchNotifications();
+    }, 10000);
+
+    return () => clearInterval(interval);
   }, []);
 
   // Function handle delete of single notification
@@ -29,8 +38,7 @@ function NotificationComponent() {
         setNotifications(response.data);
         setCount(response.data.length);
       })
-      .catch(error => {
-      });
+      .catch(error => {});
   }
 
   // Handle delete of all notification
@@ -41,8 +49,7 @@ function NotificationComponent() {
         setNotifications(response.data);
         setCount(response.data.length);
       })
-      .catch(error => {
-      });
+      .catch(error => {});
   }
 
   const menu = (
@@ -68,7 +75,7 @@ function NotificationComponent() {
   return (
     <Dropdown overlay={menu}>
       <Badge count={count}>
-        <Icon type="bell"/>
+        <Icon type="bell" />
       </Badge>
     </Dropdown>
   );
