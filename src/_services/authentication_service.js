@@ -52,7 +52,7 @@ function signin(email, nick, name, password, password_confirmation, image) {
   data.append("password", password);
   data.append("password_confirmation", password_confirmation);
   // After email confirmation user will be redirected to this url
-  data.append("confirm_success_url", "http://localhost:3001/");
+  data.append("confirm_success_url", process.env.REACT_APP_HOST);
   data.append("image", image);
 
   return axios.post("/auth/", data);

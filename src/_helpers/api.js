@@ -6,6 +6,7 @@ const apiWithAuth = axios.create({
   baseURL: "/api",
 });
 
+// Intercept authenticated response from api and handle token change 
 apiWithAuth.interceptors.response.use(
   function (response) {
     authenticationHelper.handleTokenChange(response);
