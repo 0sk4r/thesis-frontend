@@ -7,6 +7,7 @@ import PostListContainer from "./PostListContainer";
 function PostListComponent() {
   const [posts, setPosts] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
+  // Default page in pagination
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);

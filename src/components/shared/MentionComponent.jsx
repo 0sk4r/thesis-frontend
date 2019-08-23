@@ -34,6 +34,7 @@ class MentionComponent extends React.Component {
         onSearch={this.onSearch}
         onChange={this.props.onChange}
       >
+        {/* Display user list */}
         {this.state.users.map(({nickname}) => (
           <Option key={nickname} value={nickname}>
             <span>{nickname}</span>

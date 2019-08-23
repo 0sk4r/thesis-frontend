@@ -6,6 +6,7 @@ import SingleFileUpload from "components/shared/SingleFileUpload";
 
 const { TextArea } = Input;
 
+// Form for post edditing
 function PostEditForm(props) {
   const { match } = props;
   const [postId, setPostId] = useState(null);
@@ -40,6 +41,7 @@ function PostEditForm(props) {
     }
   };
 
+  // Fetch data about post to eddit
   useEffect(() => {
     postService
       .edit(match.params.id)
@@ -65,6 +67,7 @@ function PostEditForm(props) {
       });
   }, [match.params.id]);
 
+  // Submit updated post
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);

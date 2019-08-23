@@ -7,25 +7,29 @@ import {commentService} from "_services/comment_service";
 // Form for creating new comments
 function CommentForm(props) {
   // post id of parent post
-  const {post_id} = props;
+  const {post_id, setComments} = props;
 
   const {getFieldDecorator} = props.form;
 
   const [content, setContent] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
+  const [message, setMessage] = useState("")
   // Submit data to server
   function handleSubmit(e) {
     e.preventDefault();
 
     setIsLoading(true);
-
+    setError("")
+    setMessage("");
     commentService
       .create(post_id, content)
-      .then(() => {
+      .then((response) => {
+        console.log(response)
+        const newComment = response.data;
+        setComments(commentsList => [...commentsList, newComment]);
+        setMessage("Comment successfully created!");
         setIsLoading(false);
-        props.history.go(0);
       })
       .catch(error => {
         setIsLoading(false);
@@ -43,9 +47,14 @@ function CommentForm(props) {
             <Alert message="Error" description={error} type="error" showIcon/>
           </div>
         )}
+        {message && (
+          <div>
+            <Alert message="Success" description={message} type="success" showIcon/>
+          </div>
+        )}
       </div>
       <Form onSubmit={handleSubmit}>
-        <Form.Item label="Comment:" name="content">
+        <Form.Item label="Comment:" name="content" value={content}>
           {getFieldDecorator("content", {
             rules: [
               {
@@ -67,6 +76,6 @@ function CommentForm(props) {
   );
 }
 
-const WrappedCommentForm = Form.create({name: "new"})(CommentForm);
+const WrappedCommentForm = Form.create()(CommentForm);
 const WrappedComentFormWithRouter = withRouter(WrappedCommentForm);
 export default WrappedComentFormWithRouter;

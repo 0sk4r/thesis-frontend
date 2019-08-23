@@ -6,7 +6,7 @@ import {AuthContext} from "_helpers/auth_context";
 
 // Show comment list and comment form for post
 function CommentComponent(props) {
-  const {post_id, comments} = props;
+  const {post_id, comments, setComments} = props;
   const context = useContext(AuthContext);
 
   return (
@@ -18,12 +18,13 @@ function CommentComponent(props) {
         dataSource={comments}
         renderItem={comment => (
           <li>
+            {/* Display comment list */}
             <CommentShow comment={comment}/>
           </li>
         )}
       />
       {/* Display form only if user is logged */}
-      {context.isAuth ? <CommentForm post_id={post_id}/> : null}
+      {context.isAuth ? <CommentForm post_id={post_id} setComments={setComments}/> : null}
     </React.Fragment>
   );
 }

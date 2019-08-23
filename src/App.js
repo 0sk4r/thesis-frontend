@@ -27,19 +27,29 @@ class App extends React.Component {
 
             <Content style={{padding: "50px 50px"}}>
               <div style={{background: "#fff", padding: 24, minHeight: 280}}>
+                {/* Routing definition */}
+                {/* Main page rouute */}
                 <Route path="/" exact component={PostListComponent}/>
+                {/* Sign in route */}
                 <Route path="/signin" component={SignIn}/>
+                {/* Login route */}
                 <Route path="/login" component={LogIn}/>
+                {/* Logout route */}
                 <PrivateRoute path="/logout" component={LogOut}/>
                 <Switch>
+                  {/* Route to new post form */}
                   <PrivateRoute path="/posts/new" component={PostForm}/>
+                  {/* Route to post edit form */}
                   <PrivateRoute
                     path="/posts/:id/edit"
                     component={PostEditForm}
                   />
+                  {/* Route to post show component */}
                   <Route path="/posts/:id" component={PostShow}/>
                 </Switch>
+                {/* Route to user edit form */}
                 <PrivateRoute path="/users/edit" component={UserEditForm}/>
+                {/* Route to posts from selected category */}
                 <Route path="/categories/:id" component={CategoryShow}/>
               </div>
             </Content>

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Button, Form, Icon, Upload} from "antd";
 
+// Component for file upload
 function SingleFileUpload({setFile}) {
   const [fileList, setFileList] = useState([]);
 

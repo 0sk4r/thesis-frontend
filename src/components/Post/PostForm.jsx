@@ -6,6 +6,7 @@ import {Alert, Button, Form, Input} from "antd";
 
 const {TextArea} = Input;
 
+// Post creation form
 function PostForm(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -39,8 +40,10 @@ function PostForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    // Set loading status
     setIsLoading(true);
 
+    // Post data to api
     postService
       .create(title, content, file, categoryId)
       .then(response => {

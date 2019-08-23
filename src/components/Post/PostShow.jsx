@@ -60,7 +60,7 @@ function PostShow(props) {
         <PostContainer post={post}/>
       </List>
       {/* Pass comment data */}
-      <CommentComponent post_id={post.id} comments={comments}/>
+      <CommentComponent post_id={post.id} comments={comments} setComments={setComments}/>
     </React.Fragment>
   );
 }

@@ -60,7 +60,8 @@ function NotificationComponent() {
           handleDeleteNotification={handleDeleteNotification}
         />
       ))}
-      <Menu.Item key="dlkajslkjdlka">
+      {/* Button delete all notifications*/}
+      <Menu.Item>
         <Button
           type="danger"
           shape="round"

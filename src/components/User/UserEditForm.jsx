@@ -3,6 +3,7 @@ import {Alert, Avatar, Button, Col, Form, Input, Row} from "antd";
 import {userService} from "../../_services/user_service";
 import SingleFileUpload from "components/shared/SingleFileUpload";
 
+// Form for user edit
 function UserEditForm(props) {
   const {getFieldDecorator} = props.form;
 
@@ -38,6 +39,7 @@ function UserEditForm(props) {
     }
   };
 
+  // Fetch data about user for edit
   useEffect(() => {
     userService
       .edit()
@@ -54,6 +56,7 @@ function UserEditForm(props) {
       });
   }, []);
 
+  // Submit data to api
   function handleSubmit(e) {
     e.preventDefault();
     setIsLoading(true);

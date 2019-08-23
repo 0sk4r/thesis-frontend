@@ -32,6 +32,7 @@ class LogIn extends React.Component {
     }
   }
 
+  // Handle form submit
   handleSubmit(e) {
     e.preventDefault();
     this.setState({isLoading: true});
@@ -67,6 +68,7 @@ class LogIn extends React.Component {
 
     const {getFieldDecorator} = this.props.form;
 
+    // Syle for form
     const formItemLayout = {
       labelCol: {
         xs: {span: 24},
