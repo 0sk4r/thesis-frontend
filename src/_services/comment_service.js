@@ -1,4 +1,3 @@
-import {authenticationHelper} from "../_helpers/auth_helpers";
 import {apiWithAuth} from "_helpers/api"
 
 // Service interact with comment api
@@ -15,10 +14,6 @@ function create(post_id, content) {
   return apiWithAuth
     .post(
       "/comments/",
-      data,
-      {
-        // Add authentication headers to request
-        headers: authenticationHelper.getHeaders()
-      }
+      data
     )
 }

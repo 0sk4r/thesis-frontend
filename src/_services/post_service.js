@@ -1,4 +1,3 @@
-import {authenticationHelper} from "../_helpers/auth_helpers";
 import {api, apiWithAuth} from "_helpers/api"
 
 // Service interact with post api
@@ -7,7 +6,8 @@ export const postService = {
   edit,
   getAll,
   get,
-  update
+  update,
+  search
 };
 
 // create new post
@@ -22,18 +22,13 @@ function create(title, content, file, category) {
   return apiWithAuth
     .post(
       "/posts/",
-      data,
-      {
-        headers: authenticationHelper.getHeaders()
-      }
+      data
     )
 }
 
 // Get info to post edit form
 function edit(id) {
-  return apiWithAuth.get(`/posts/${id}/edit`, {
-    headers: authenticationHelper.getHeaders()
-  })
+  return apiWithAuth.get(`/posts/${id}/edit`)
 }
 
 // Update post data
@@ -47,10 +42,7 @@ function update(title, content, file, category, postId) {
   return apiWithAuth
     .put(
       `/posts/${postId}`,
-      data,
-      {
-        headers: authenticationHelper.getHeaders()
-      }
+      data
     )
 }
 
@@ -62,4 +54,8 @@ function getAll(page) {
 // Get data for single post
 function get(id) {
   return api.get(`/posts/${id}`)
+}
+
+function search(key) {
+  return api.get(`/search/${key}`);
 }
