@@ -39,7 +39,7 @@ function SearchComponent(props) {
       dataSource={posts.map(renderOption)}
       onSearch={searchResult}
       onSelect={onSelect}
-      placeholder="input here"
+      placeholder="Search..."
       optionLabelProp="text"
     >
       <Input
