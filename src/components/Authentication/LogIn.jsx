@@ -1,7 +1,7 @@
 import React from "react";
-import {authenticationService} from "_services/authentication_service";
-import {Alert, Button, Form, Input} from "antd";
-import {AuthContext} from "_helpers/auth_context";
+import { authenticationService } from "_services/authentication_service";
+import { Alert, Button, Form, Input } from "antd";
+import { AuthContext } from "_helpers/auth_context";
 
 // Component handling Login action
 class LogIn extends React.Component {
@@ -21,8 +21,8 @@ class LogIn extends React.Component {
 
   // Handle input change
   handleChange(e) {
-    const {name, value} = e.target;
-    this.setState({[name]: value});
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   }
 
   // If user is logged redirect to root
@@ -35,13 +35,13 @@ class LogIn extends React.Component {
   // Handle form submit
   handleSubmit(e) {
     e.preventDefault();
-    this.setState({isLoading: true});
-    const {email, password} = this.state;
+    this.setState({ isLoading: true });
+    const { email, password } = this.state;
 
     authenticationService
       .login(email, password)
       .then(user => {
-        this.setState({isLoading: false});
+        this.setState({ isLoading: false });
         // Login user in context
         this.context.loginContext(user);
         // Redirect to root after login
@@ -56,27 +56,27 @@ class LogIn extends React.Component {
           } else {
             error_messages = error.response.data.errors;
           }
-          this.setState({isLoading: false, errors: error_messages});
+          this.setState({ isLoading: false, errors: error_messages });
         } else if (error.request) {
-          this.setState({isLoading: false, errors: "Backend not responding"});
+          this.setState({ isLoading: false, errors: "Backend not responding" });
         }
       });
   }
 
   render() {
-    const {errors} = this.state;
+    const { errors } = this.state;
 
-    const {getFieldDecorator} = this.props.form;
+    const { getFieldDecorator } = this.props.form;
 
     // Syle for form
     const formItemLayout = {
       labelCol: {
-        xs: {span: 24},
-        sm: {span: 8}
+        xs: { span: 24 },
+        sm: { span: 8 }
       },
       wrapperCol: {
-        xs: {span: 24},
-        sm: {span: 8}
+        xs: { span: 24 },
+        sm: { span: 8 }
       }
     };
 
@@ -95,7 +95,7 @@ class LogIn extends React.Component {
 
     return (
       <React.Fragment>
-        <div style={{textAlign: "center"}}>
+        <div style={{ textAlign: "center" }}>
           <h1>Log in</h1>
           {errors && (
             <div>
@@ -163,5 +163,5 @@ class LogIn extends React.Component {
 
 LogIn.contextType = AuthContext;
 
-const WrappedLogIn = Form.create({name: "login"})(LogIn);
+const WrappedLogIn = Form.create({ name: "login" })(LogIn);
 export default WrappedLogIn;

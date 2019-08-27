@@ -35,7 +35,7 @@ function CategorySelect(props) {
           }
         >
           {categories.map(category => (
-            <Option value={category.id}>{category.name}</Option>
+            <Option value={category.id} key={category.name}>{category.name}</Option>
           ))}
         </Select>
       )}
