@@ -24,7 +24,6 @@ function CommentForm(props) {
     commentService
       .create(post_id, content)
       .then(response => {
-        console.log(response);
         const newComment = response.data;
         setComments(commentsList => [...commentsList, newComment]);
         setMessage("Comment successfully created!");

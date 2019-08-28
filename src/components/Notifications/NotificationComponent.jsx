@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Badge, Button, Dropdown, Icon, Menu } from "antd";
 import { notificationService } from "_services/notification_service";
 import MentionNotification from "./MentionNotification";
+import PostNotification from "./PostNotification";
 
 // Component displaying dropdown with user notification list
 function NotificationComponent() {
@@ -13,6 +14,7 @@ function NotificationComponent() {
     notificationService
       .index()
       .then(response => {
+        console.log(response.data);
         setCount(response.data.length);
         setNotifications(response.data);
       })
@@ -54,12 +56,28 @@ function NotificationComponent() {
 
   const menu = (
     <Menu>
-      {notifications.map(notification => (
-        <MentionNotification
-          notification={notification}
-          handleDeleteNotification={handleDeleteNotification}
-        />
-      ))}
+      {notifications.map(notification => {
+        switch (notification.action_type) {
+          case "Mention":
+            return (
+              <MentionNotification
+                notification={notification}
+                handleDeleteNotification={handleDeleteNotification}
+                key={`notification${notification.id}`}
+              />
+            );
+          case "Post":
+            return (
+              <PostNotification
+                notification={notification}
+                handleDeleteNotification={handleDeleteNotification}
+                key={`notification${notification.id}`}
+              />
+            );
+          default:
+            return null;
+        }
+      })}
       {/* Button delete all notifications*/}
       <Menu.Item>
         <Button

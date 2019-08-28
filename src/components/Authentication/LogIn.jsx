@@ -48,7 +48,6 @@ class LogIn extends React.Component {
         this.props.history.push("/");
       })
       .catch(error => {
-        console.log(error);
         if (error.response) {
           let error_messages = "";
           if (error.response.status === 500) {

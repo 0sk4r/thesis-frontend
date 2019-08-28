@@ -6,7 +6,9 @@ export const userService = {
   find,
   edit,
   update,
-  getInfo
+  getInfo,
+  show,
+  follow
 };
 
 // Find users that nickname fit to key
@@ -32,4 +34,12 @@ function update(name, nickname, image) {
 // get info about logged user
 function getInfo() {
   return apiWithAuth.get("/users/getInfo");
+}
+
+function show(id, page) {
+  return api.get(`/users/${id}/page/${page}`);
+}
+
+function follow(id) {
+  return apiWithAuth.post("/follows/", { following_id: id });
 }

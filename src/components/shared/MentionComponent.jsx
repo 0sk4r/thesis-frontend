@@ -20,7 +20,6 @@ class MentionComponent extends React.Component {
   onSearch(nickname) {
     this.setState({ isLoading: true });
     userService.find(nickname).then(response => {
-      console.log(response.data);
       this.setState({ isLoading: false, users: response.data });
     });
   }
