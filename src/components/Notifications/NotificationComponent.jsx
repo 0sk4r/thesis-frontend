@@ -14,7 +14,6 @@ function NotificationComponent() {
     notificationService
       .index()
       .then(response => {
-        console.log(response.data);
         setCount(response.data.length);
         setNotifications(response.data);
       })
@@ -58,6 +57,7 @@ function NotificationComponent() {
     <Menu>
       {notifications.map(notification => {
         switch (notification.action_type) {
+          // Render notification depending on type
           case "Mention":
             return (
               <MentionNotification

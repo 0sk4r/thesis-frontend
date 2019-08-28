@@ -3,6 +3,7 @@ import { Descriptions, Avatar } from "antd";
 import FollowButton from "components/shared/Buttons/FollowButton";
 import { AuthContext } from "_helpers/auth_context";
 
+// Display info about user
 function UserInfo({ user }) {
   const context = useContext(AuthContext);
 

@@ -6,6 +6,7 @@ import ErrorMessage from "../ErrorMessage";
 // Button for dislike action
 function FollowButton(props) {
   const [text, setText] = useState("Follow");
+  
   function handleClick() {
     userService
       .follow(props.id)

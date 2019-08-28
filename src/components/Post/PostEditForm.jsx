@@ -48,6 +48,7 @@ function PostEditForm(props) {
       .then(response => {
         const post = response.data;
 
+        // set state
         setPostId(post.id);
         setTitle(post.title);
         setContent(post.content);
@@ -89,6 +90,7 @@ function PostEditForm(props) {
 
   return (
     <React.Fragment>
+      {/* display error msg */}
       {error ? (
         <React.Fragment>
           <div style={{ textAlign: "center" }}>
@@ -105,6 +107,7 @@ function PostEditForm(props) {
       ) : (
         <React.Fragment>
           <Form {...formItemLayout} onSubmit={handleSubmit}>
+            {/* Post title */}
             <Form.Item label="Title">
               {getFieldDecorator("title", {
                 initialValue: title,
@@ -119,7 +122,7 @@ function PostEditForm(props) {
                 <Input name="title" onChange={e => setTitle(e.target.value)} />
               )}
             </Form.Item>
-
+            {/* Post content */}
             <Form.Item label="Content:">
               {getFieldDecorator("content", {
                 initialValue: content,
@@ -138,11 +141,13 @@ function PostEditForm(props) {
                 />
               )}
             </Form.Item>
-
+            
+            {/* Post image */}
             <Form.Item label="Image:">
               <SingleFileUpload setFile={setFile} />
             </Form.Item>
 
+            {/* Post category */}
             <Form.Item label="Category:">
               <CategorySelect
                 handleCategoryChange={id => setCategoryId(id)}

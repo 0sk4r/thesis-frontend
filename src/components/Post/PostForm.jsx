@@ -63,6 +63,7 @@ function PostForm(props) {
     <React.Fragment>
       <div style={{textAlign: "center"}}>
         <h1>New post</h1>
+        {/* Display errors */}
         {error && (
           <div>
             <Alert message="Error" description={error} type="error" showIcon/>
@@ -70,6 +71,7 @@ function PostForm(props) {
         )}
       </div>
       <Form {...formItemLayout} onSubmit={handleSubmit}>
+        {/* Post title */}
         <Form.Item label="Title:">
           {getFieldDecorator("title", {
             rules: [
@@ -81,7 +83,7 @@ function PostForm(props) {
             ]
           })(<Input name="title" onChange={e => setTitle(e.target.value)}/>)}
         </Form.Item>
-
+        {/* Post content */}
         <Form.Item label="Content:">
           {getFieldDecorator("content", {
             rules: [
@@ -101,10 +103,12 @@ function PostForm(props) {
           )}
         </Form.Item>
 
+        {/* Post image */}
         <Form.Item label="Image:">
           <SingleFileUpload setFile={setFile}/>
         </Form.Item>
 
+        {/* Post category */}
         <Form.Item label="Category:">
           <CategorySelect
             handleCategoryChange={id => setCategoryId(id)}

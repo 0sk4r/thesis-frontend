@@ -29,7 +29,7 @@ function SearchComponent(props) {
       .then(response => {
         setPosts(response.data);
       })
-      .catch(error => console.log(error.response));
+      .catch(error => {});
   }
 
   return (

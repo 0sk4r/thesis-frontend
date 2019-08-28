@@ -18,10 +18,12 @@ function PostContainer(props) {
   return (
     <List.Item
       key={post.id}
+      // display button for like, dislike etc.
       actions={PostActions(post)}
       extra={<img width={272} alt="logo" src={post.image.url} />}
     >
       <List.Item.Meta
+        // display user avatar
         avatar={<Avatar src={post.user.image.url} />}
         title={
           <Link to={"/posts/" + post.id}>

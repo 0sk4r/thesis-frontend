@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react";
-import {Alert, Avatar, Button, Col, Form, Input, Row} from "antd";
-import {userService} from "../../_services/user_service";
+import React, { useEffect, useState } from "react";
+import { Alert, Avatar, Button, Col, Form, Input, Row } from "antd";
+import { userService } from "../../_services/user_service";
 import SingleFileUpload from "components/shared/SingleFileUpload";
 
 // Form for user edit
 function UserEditForm(props) {
-  const {getFieldDecorator} = props.form;
+  const { getFieldDecorator } = props.form;
 
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -17,12 +17,12 @@ function UserEditForm(props) {
 
   const formItemLayout = {
     labelCol: {
-      xs: {span: 24},
-      sm: {span: 8}
+      xs: { span: 24 },
+      sm: { span: 8 }
     },
     wrapperCol: {
-      xs: {span: 24},
-      sm: {span: 8}
+      xs: { span: 24 },
+      sm: { span: 8 }
     }
   };
 
@@ -76,20 +76,27 @@ function UserEditForm(props) {
 
   return (
     <React.Fragment>
-      <div style={{textAlign: "center"}}>
+      <div style={{ textAlign: "center" }}>
+        {/* Display errors and messages */}
         <h1>Edit user info</h1>
         {errors && (
           <div>
-            <Alert message="Error" description={errors} type="error" showIcon/>
+            <Alert message="Error" description={errors} type="error" showIcon />
           </div>
         )}
         {message && (
           <div>
-            <Alert message="Success" description={message} type="success" showIcon/>
+            <Alert
+              message="Success"
+              description={message}
+              type="success"
+              showIcon
+            />
           </div>
         )}
       </div>
       <Form {...formItemLayout} onSubmit={handleSubmit}>
+        {/* User name */}
         <Form.Item label="Name:">
           {getFieldDecorator("name", {
             initialValue: name,
@@ -100,9 +107,9 @@ function UserEditForm(props) {
                 whitespace: true
               }
             ]
-          })(<Input name="name" onChange={e => setName(e.target.value)}/>)}
+          })(<Input name="name" onChange={e => setName(e.target.value)} />)}
         </Form.Item>
-
+        {/* User nickname */}
         <Form.Item label="Nick:">
           {getFieldDecorator("nick", {
             initialValue: nickname,
@@ -117,20 +124,21 @@ function UserEditForm(props) {
             <Input
               name="nick"
               onChange={e => {
-                setNickname(e.target.value)
+                setNickname(e.target.value);
               }}
               autoComplete="username"
             />
           )}
         </Form.Item>
 
+        {/* User avatar */}
         <Form.Item label="Avatar:">
           <Row>
             <Col span={20}>
-              <SingleFileUpload setFile={setAvatar}/>
+              <SingleFileUpload setFile={setAvatar} />
             </Col>
             <Col span={4}>
-              <Avatar src={oldAvatar} size={64}/>
+              <Avatar src={oldAvatar} size={64} />
             </Col>
           </Row>
         </Form.Item>
@@ -145,5 +153,5 @@ function UserEditForm(props) {
   );
 }
 
-const WrappedUserEditForm = Form.create({name: "new"})(UserEditForm);
+const WrappedUserEditForm = Form.create({ name: "new" })(UserEditForm);
 export default WrappedUserEditForm;

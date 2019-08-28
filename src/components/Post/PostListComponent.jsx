@@ -6,9 +6,11 @@ import PostListContainer from "./PostListContainer";
 // Component responsible for present list of all posts
 function PostListComponent() {
   const [posts, setPosts] = useState([]);
+  // Number if items to paginate
   const [totalItems, setTotalItems] = useState(0);
   // Default page in pagination
   const [page, setPage] = useState(1);
+  // Number of items on page
   const [perPage, setPerPage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState("");
@@ -16,6 +18,7 @@ function PostListComponent() {
   // Fetch post list from backend with pagination. Refetch data when page change
   useEffect(() => {
     setIsLoading(true);
+    // Fetch page
     postService
       .getAll(page)
       .then(response => {
@@ -47,7 +50,9 @@ function PostListComponent() {
 
   return (
     <React.Fragment>
+      {/* Container for post list */}
       <PostListContainer posts={posts} isLoading={isLoading} errors={errors}/>
+      {/* Component for pagination */}
       <Pagination total={totalItems} pageSize={perPage} onChange={onChange}/>
     </React.Fragment>
   );

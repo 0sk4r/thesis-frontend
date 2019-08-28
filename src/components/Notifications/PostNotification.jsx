@@ -3,9 +3,9 @@ import { Button, Col, Menu, Row } from "antd";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-// Component displaying mention notification
+// Component displaying post notification
 function PostNotification(props) {
-  // COMMENT_LENGTH decide how long comment quote will be in notification
+
   const notification = props.notification;
   const post = notification.action;
   const postAuthor = post.user;
@@ -18,6 +18,7 @@ function PostNotification(props) {
     <Menu.Item {...props} style={style}>
       <Row>
         <Col span={20}>
+          {/* Link to post */}
           <Link to={`/posts/${post.id}=`}>
             {postAuthor.name} created new post
           </Link>

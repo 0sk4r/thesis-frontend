@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 // Component restrict access to component for unauth users
 function PrivateRoute({ component: Component, ...rest }) {
   const context = useContext(AuthContext);
-
+  // Render component only if user is logged in context. If not redirect to login page
   return (
     <Route
       {...rest}

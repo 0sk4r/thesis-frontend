@@ -59,7 +59,7 @@ function PostShow(props) {
       <List itemLayout="vertical" size="large" loading={isLoading}>
         <PostContainer post={post}/>
       </List>
-      {/* Pass comment data */}
+      {/* Pass comment data and display comments*/}
       <CommentComponent post_id={post.id} comments={comments} setComments={setComments}/>
     </React.Fragment>
   );

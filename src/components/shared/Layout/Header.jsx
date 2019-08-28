@@ -29,8 +29,10 @@ function CustomHeader() {
             <img src={Logo} style={{ height: "54px" }} alt="Home" />
           </Link>
         </Menu.Item>
+        {/* Menu with list of categories */}
         <CategoryMenu />
 
+        {/*Search component */}
         <Menu.Item style={style}>
           <SearchComponent />
         </Menu.Item>
