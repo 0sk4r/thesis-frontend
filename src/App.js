@@ -48,11 +48,14 @@ class App extends React.Component {
                   {/* Route to post show component */}
                   <Route path="/posts/:id" component={PostShow} />
                 </Switch>
-                {/* Route to user edit form */}
-                <PrivateRoute path="/users/edit" component={UserEditForm} />
+                <Switch>
+                  {/* Route to user edit form */}
+                  <PrivateRoute path="/users/edit" component={UserEditForm} />
+                  {/* Route to personal page */}
+                  <Route path="/users/:id" component={UserShow} />
+                </Switch>
                 {/* Route to posts from selected category */}
                 <Route path="/categories/:id" component={CategoryShow} />
-                <Route path="/users/:id" component={UserShow} />
               </div>
             </Content>
 
